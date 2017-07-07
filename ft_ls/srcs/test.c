@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/27 02:12:18 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/05 20:41:38 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/07/06 21:51:24 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/07/07 06:04:01 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Fait un tri lexicographique
+** tab_len
 */
 
-/*
-char	**lexico_sort()
+int		len_tab(char **tab)
 {
-	g_b.rep = opendir(g_b.rep);
-	while ((g_b.dirent = readdir(g_b.rep)))
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
+
+/*
+** Test 
 */
+
+void	print()
+{
+	ft_putendl("Paths : ");
+	ft_print_tab(g_b.paths);
+	ft_putstr("Options : ");
+	ft_putendl(g_b.options);
+}

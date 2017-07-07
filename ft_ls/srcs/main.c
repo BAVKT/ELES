@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/06/27 02:56:32 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/07 06:16:53 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,46 @@
 ** ls de base
 */
 
-void	ft_ls()
+void	ls()
 {
-	while ((g_b.dirent = readdir(g_b.rep)))
+			ft_putendl("ls();");
+	g_d.rep = opendir(g_d.path);
+	while ((g_d.dirent = readdir(g_d.rep)))
 	{
-		ft_putstr(g_b.dirent->d_name);
-		ft_putstr("    ");
+		if (g_d.dirent->d_name[0] != '.')
+		{
+			ft_putstr(g_d.dirent->d_name);
+			ft_putstr("    ");
+		}
 	}
-	closedir(g_b.rep);
+	ft_putchar('\n');
+	closedir(g_d.rep);
 }
 
-int		main()
+/*
+** Split and activation of the opts
+*/
+/*
+void	opts(char **opt)
 {
-	init_base();
-	ft_ls();
-	ft_putnbrendl(len_dirent((g_b.dirent)));
+	
+	if (ft_strstr());
+}
+*/
+
+int		main(int ac, char **av)
+{
+	int		i;
+
+	(void)ac;
+	i = 0;
+	init_base(av);
+	init_dir();
+	while (g_b.paths[i])
+	{
+		g_d.path = ft_strdup(g_b.paths[i++]);
+		ls();
+	}
+	print();
 	return (0);
 }

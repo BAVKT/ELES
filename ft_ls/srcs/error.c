@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/27 02:12:18 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/05 20:41:38 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/07/07 05:31:42 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/07/07 05:50:12 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Fait un tri lexicographique
+** Error if path does not exist
 */
 
-/*
-char	**lexico_sort()
+void	error_path(char *arg)
 {
-	g_b.rep = opendir(g_b.rep);
-	while ((g_b.dirent = readdir(g_b.rep)))
+	ft_putstr("ls: ");
+	ft_putstr(arg);
+	ft_putendl(": No such file or directory");
+	exit(0);
 }
+
+/*
+** Print usage
 */
+
+void	usage()
+{
+	ft_putendl("usage: ls [-laRrt] [file ...]");
+	exit(1);
+}

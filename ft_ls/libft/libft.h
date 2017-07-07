@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 13:46:11 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/06/01 17:08:35 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/07 06:00:27 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void				ft_putnbrcolor(int i, char *color);
 void				ft_changecolor(char *color);
 void				ft_resetcolor();
 void				ft_rot(int nb, char *str, int start, int end);
-void				ft_print_tab(char **str, int size);
+void				ft_print_tab(char **str);
 void				*ft_memalloc(size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
