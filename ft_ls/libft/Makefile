@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vmercadi <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 06:27:28 by vmercadi          #+#    #+#              #
-#    Updated: 2017/07/07 00:06:19 by vmercadi         ###   ########.fr        #
+#    Updated: 2017/07/08 01:04:28 by vmercadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,13 +43,13 @@ SRCO = $(SRC:%.c=%.o)
 all: $(NAME) 
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror $(SRC)
-	ar rc $(NAME) $(SRCO)
+	@gcc -c -Wall -Wextra -Werror $(SRC)
+	@ar rc $(NAME) $(SRCO)
 
 clean:
-	rm -rf $(SRCO)
+	@rm -rf $(SRCO)
 
 fclean: clean
-	rm -rf $(NAME) 
+	@rm -rf $(NAME) 
 
 re: fclean all

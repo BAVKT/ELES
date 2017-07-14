@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/07 06:16:53 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/08 05:39:52 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 void	ls()
 {
 			ft_putendl("ls();");
+			// ft_putendl(g_d.path);	
 	g_d.rep = opendir(g_d.path);
 	while ((g_d.dirent = readdir(g_d.rep)))
 	{
