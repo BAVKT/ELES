@@ -18,7 +18,7 @@
 
 void	set_paths(char **av)
 {
-			ft_putendl("set_paths();");
+            ft_putstrcolor("set_paths();", MAGENTA);
 	int		i;
 	int		j;
 

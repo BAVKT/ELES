@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 /*
 ** ls de base
@@ -19,7 +18,7 @@
 
 void	ls()
 {
-			ft_putendl("ls();");
+            ft_putstrcolor("ls();", MAGENTA);
 			// ft_putendl(g_d.path);	
 	g_d.rep = opendir(g_d.path);
 	while ((g_d.dirent = readdir(g_d.rep)))

@@ -17,7 +17,7 @@
 */
 void	init_base(char **av)
 {
-			ft_putendl("init_base();");
+            ft_putstrcolor("init_base();", MAGENTA);
 	int		i;
 
 	i = 1;
@@ -32,13 +32,10 @@ void	init_base(char **av)
 */
 void	init_dir()
 {
-			ft_putendl("init_dir();");
-
+            ft_putstrcolor("init_dir();", MAGENTA);
 	if (g_d.path && !g_d.dirent)
 	{
-			ft_putendl("yo");
 		g_d.rep = opendir(g_d.path);
-				ft_putendl(g_d.path);
 		g_d.dirent = readdir(g_d.rep);
 		closedir(g_d.rep);
 		//g_d.tabdir = init_tab(g_d.len);

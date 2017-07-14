@@ -18,7 +18,7 @@
 
 int		len_dirent()
 {
-			ft_putendl("len_dirent();");
+            ft_putstrcolor("len_dirent();", MAGENTA);	
 	int	i;
 
 	i = 0;

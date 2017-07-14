@@ -18,7 +18,7 @@
 
 char	*opt_tab(char **av)
 {
-			ft_putendl("opt_tab();");
+            ft_putstrcolor("opt_tab();", MAGENTA);
 	int		i;
 	int		j;
 	int		k;
@@ -49,7 +49,7 @@ char	*opt_tab(char **av)
 
 void	opt_a()
 {
-			ft_putendl("opt_a();");
+            ft_putstrcolor("opt_a();", MAGENTA);
 	g_d.rep = opendir(g_d.path);
 	while ((g_d.dirent = readdir(g_d.rep)))
 	{

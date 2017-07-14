@@ -12,65 +12,13 @@
 
 #include "ft_ls.h"
 
-//VERSION QUI MARCHE A MOITIE
-/*
-** Check if the given path exist
-*/
-/*
-int		check_path(char *path)
-{
-			ft_putendl("check_path();");
-    int		i;
-    char	*tmp;
-
-    		ft_putendl(path);
-    		ft_putendl(g_d.path);
-    i = 0;
-    tmp = ft_strnew(0);
-    if (ft_strstr("/", path))
-    {
-
-    	while (path[i])
-    		i++;
-    	while (path[i] != '/')
-    		i--;
-    	tmp = ft_strncpy(path, path, path - &path[i]);
-    }	
-	else
-    {
-    	tmp = path;
-    	path = ft_strdup(".");
-    			ft_putendl(tmp);
-    }
-    i = 0;
-    if ((g_d.rep = opendir(path)))
-    {
-        while ((g_d.dirent = readdir(g_d.rep)))
-        {
-            if (!ft_strcmp(tmp, g_d.dirent->d_name))
-            {
-            		ft_putendl(g_d.dirent->d_name);
-                i = 1;
-            }
-        }
-        closedir(g_d.rep);
-    }
-    		ft_putendl("AHUFUAEFHUAHFIAJJFOAFW");
-    		ft_putnbrendl(i);
-	g_d.path = ft_strdup(path);			
-	if (!i)
-		error_path(path);
-    return (i);
-}
-*/
-
 /*
 ** Return 1 if path is a dir, 0 if nop
 */
 
 int     check_dir(char *path)
 {
-            ft_putendl("check_dir");
+            ft_putstrcolor("check_dir();", MAGENTA);
     if((g_d.rep = opendir(path)))
     {
         closedir(g_d.rep);
@@ -85,7 +33,7 @@ int     check_dir(char *path)
 
 int     check_file(char *path)
 {
-            ft_putendl("check_file");
+            ft_putstrcolor("check_file();", MAGENTA);
     char    *tmp;
     char    *tmp2;
     char    *c;
@@ -122,7 +70,7 @@ int     check_file(char *path)
 
 int     check_path(char *path)
 {
-            ft_putendl("check_path();");
+            ft_putstrcolor("check_path();", MAGENTA);
     char    *tmp;
     char    *c;
 
