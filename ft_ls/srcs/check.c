@@ -6,154 +6,31 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 03:27:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/08 05:39:54 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/25 21:48:43 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Return 1 if path is a dir, 0 if nop
-*/
-
-int     check_dir(char *path)
-{
-            ft_putstrcolor("check_dir();", MAGENTA);
-    if((g_d.rep = opendir(path)))
-    {
-        closedir(g_d.rep);
-        return (1);
-    }
-    return(0);
-}
-
-/*
-** If path is a file return 1, else 0
-*/
-
-int     check_file(char *path)
-{
-            ft_putstrcolor("check_file();", MAGENTA);
-    char    *tmp;
-    char    *tmp2;
-    char    *c;
-
-    tmp = ft_strnew(0);
-    tmp2 = ft_strnew(0);
-    if ((c = ft_strrchr(path, '/')))
-    {
-        tmp = ft_strdup(c + 1);
-        tmp2 = ft_strncpy(tmp2, path, c - path);
-    }
-    else
-    {
-        tmp = ft_strdup(path);
-        tmp2 = ft_strdup(".");
-    }
-        ft_putendl("ya");
-    g_d.rep = opendir(tmp2);
-    while ((g_d.dirent = readdir(g_d.rep)))
-    {
-        if (!ft_strcmp(tmp, g_d.dirent->d_name))
-        {
-            closedir(g_d.rep);
-            return (1);
-        }
-    }
-    closedir(g_d.rep);
-    return (0);
-}
-
-/*
-** Check the path, return 2 if path is dir 1, if path is file, 0 else 
+** Check the path, return 2 if path is dir 1, 
+** if path is file, 3 if symbolic link 0 else 
 */
 
 int     check_path(char *path)
 {
             ft_putstrcolor("check_path();", MAGENTA);
-    char    *tmp;
-    char    *c;
+    struct stat st;
 
-    tmp = ft_strnew(0);
-    if ((c = ft_strrchr(path, '/')))
-    {
-        if (!*(c + 1))
-        {
-            while (*c != '/')
-                c--;
-        }
-        tmp = ft_strncpy(tmp, path, c - path);
-    }   
-    else
-        tmp = path;
-    if (check_dir(path))
+    stat(path, &st);
+    if (S_ISDIR(st.st_mode))
         return (2);
-    else if (check_file(tmp))
-        return (1);
-    else
-        error_path(path);    
+    else if (S_ISREG(st.st_mode))
+        return (1);                                             
+    else if (S_ISLNK(st.st_mode))
+        return (3);
+    error_path(path);
     return (0);
 }
-
-
-// /*
-// ** Split the path
-// */
-// char	*split_path()
-// {
-// 			ft_putendl("check_path();");
-//     int		i;
-//     char	*tmp;
-
-//     		ft_putendl(g_d.path);
-//     i = 0;
-//     tmp = ft_strnew(1);
-//     if (ft_strstr("/", g_d.path))
-//     {
-//     	while (g_d.path[i])
-//     		i++;
-//     	while (g_d.path[i] != '/')
-//     		i--;
-//     	tmp = ft_strncpy(g_d.path, g_d.path, g_d.path - &g_d.path[i]);
-//     }	
-// 	else
-//     {
-//     	tmp = g_d.path;
-//     	g_d.path = ft_strdup(".");
-//     			ft_putendl(tmp);
-//     }
-//     return (tmp);
-// }
-
-// /*
-// ** Check if the given path exist
-// */
-// int		check_path(char *path)
-// {
-// 	int		i;
-// 	char	*tmp;
-
-//     i = 0;
-//     g_d.path = ft_strdup(path);
-//     tmp = ft_strnew(1);
-// 	tmp = split_path();
-//     if ((g_d.rep = opendir(g_d.path)))
-//     {
-//         while ((g_d.dirent = readdir(g_d.rep)))
-//         {
-//             if (!ft_strcmp(tmp, g_d.dirent->d_name))
-//             {
-//             		ft_putendl(g_d.dirent->d_name);
-//                 i = 1;
-//             }
-//         }
-//         closedir(g_d.rep);
-//     }
-//     		ft_putendl("AHUFUAEFHUAHFIAJJFOAFW");
-//     		ft_putnbrendl(i);	
-// 	if (!i)
-// 		error_path(g_d.path);
-//     return (i);
-// }
 
 

@@ -6,14 +6,14 @@
 #    By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/08 16:11:48 by vmercadi          #+#    #+#              #
-#    Updated: 2017/07/08 01:03:36 by vmercadi         ###   ########.fr        #
+#    Updated: 2017/07/25 21:53:08 by vmercadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
 SRC = srcs/main.c srcs/sort.c srcs/utils.c srcs/init.c srcs/test.c srcs/opt1.c \
-		srcs/error.c srcs/check.c srcs/path.c
+		srcs/error.c srcs/check.c
 
 FLAGS = -Wall -Wextra -Werror
 

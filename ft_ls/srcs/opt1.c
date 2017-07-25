@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/08 05:39:53 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/25 21:48:42 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,47 @@ char	*opt_tab(char **av)
 }
 
 /*
-** -a Option
+** -a Option	Show hidden files
 */
 
-void	opt_a()
+void	opt_a(t_dir *dir)
 {
             ft_putstrcolor("opt_a();", MAGENTA);
-	g_d.rep = opendir(g_d.path);
-	while ((g_d.dirent = readdir(g_d.rep)))
-	{
-		ft_putstr(g_d.dirent->d_name);
-		ft_putstr("    ");
-	}
-	closedir(g_d.rep);
+	int	i;
+
+	i = 0;
+	dir->rep = opendir(dir->path);
+	while ((dir->dirent = readdir(dir->rep)))
+		dir->names[i++] = ft_strdup(dir->dirent->d_name);
+	closedir(dir->rep);
+	dir->names[i] = NULL;
+    dir->display = (char **)malloc(sizeof(char *) * dir->len + 1);
+    dir->display = ft_cp_tab(dir->display, dir->names, dir->len);
 }
 
 /*
-** -R option
+** -t Option	Sort by time
 */
 
-void	opt_R()
+void	opt_t()
 {
-			ft_putendl("opt_R();");
-	return ;
+
+}
+
+/*
+** -r Option	Reverse the order
+*/
+
+void	opt_r()
+{
+
+}
+
+/*
+** -l Option	Give more detailled informations 
+*/
+
+void	opt_l()
+{
+
 }

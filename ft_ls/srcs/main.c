@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+  /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -13,50 +13,41 @@
 #include "ft_ls.h"
 
 /*
-** ls de base
+** ls
 */
 
-void	ls()
+void	ls(char *path)
 {
             ft_putstrcolor("ls();", MAGENTA);
-			// ft_putendl(g_d.path);	
-	g_d.rep = opendir(g_d.path);
-	while ((g_d.dirent = readdir(g_d.rep)))
-	{
-		if (g_d.dirent->d_name[0] != '.')
-		{
-			ft_putstr(g_d.dirent->d_name);
-			ft_putstr("    ");
-		}
-	}
-	ft_putchar('\n');
-	closedir(g_d.rep);
-}
+	t_dir	dir;
+	int		i;
 
-/*
-** Split and activation of the opts
-*/
-/*
-void	opts(char **opt)
-{
-	
-	if (ft_strstr());
+	init_dir(&dir, path);
+    ft_strchr(g_b.options, 'a') ? opt_a(&dir) : get_names(&dir);
+    !ft_strchr(g_b.options, 't') ? : opt_t(&dir);
+    !ft_strchr(g_b.options, 'r') ? : opt_r(&dir);
+    !ft_strchr(g_b.options, 'l') ? : opt_l(&dir);
+    display(&dir);
+    if (ft_strchr(g_b.options, 'R'))
+    {
+    	i = 0;
+    	while (dir.dir_tab[i])
+    		ls(ft_strjoin(path, dir.dir_tab[i++]));
+    }
 }
-*/
 
 int		main(int ac, char **av)
 {
-	int		i;
+            ft_putstrcolor("main();", MAGENTA);
+	int	i;
+	int	j;
 
-	(void)ac;
 	i = 0;
+	(void)ac;
 	init_base(av);
-	init_dir();
-	while (g_b.paths[i])
-	{
-		g_d.path = ft_strdup(g_b.paths[i++]);
-		ls();
-	}
+	j = tab_len(g_b.paths);
+	while (i < j)
+		ls(g_b.paths[i++]);
 	print();
 	return (0);
 }
