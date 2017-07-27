@@ -13,32 +13,39 @@
 #include "ft_ls.h"
 
 /*
-** ls
+** Lance le LS, appelle les options necessaire et est le recursif
 */
 
 void	ls(char *path)
 {
-            ft_putstrcolor("ls();", MAGENTA);
+            ft_putendlcolor("ls();", MAGENTA);
 	t_dir	dir;
 	int		i;
 
+
 	init_dir(&dir, path);
     ft_strchr(g_b.options, 'a') ? opt_a(&dir) : get_names(&dir);
+    basic_sort(&dir);
     !ft_strchr(g_b.options, 't') ? : opt_t(&dir);
     !ft_strchr(g_b.options, 'r') ? : opt_r(&dir);
     !ft_strchr(g_b.options, 'l') ? : opt_l(&dir);
-    display(&dir);
+    ft_cp_tab(dir.display, dir.names);
+    display_color(&dir);
     if (ft_strchr(g_b.options, 'R'))
     {
     	i = 0;
-    	while (dir.dir_tab[i])
+
+        path = ft_strjoin(path, "/");
+        while (dir.dir_tab[i])
+        {
     		ls(ft_strjoin(path, dir.dir_tab[i++]));
+        }
     }
 }
 
 int		main(int ac, char **av)
 {
-            ft_putstrcolor("main();", MAGENTA);
+            ft_putendlcolor("main();", MAGENTA);
 	int	i;
 	int	j;
 

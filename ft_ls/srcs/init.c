@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
+#include <stdio.h>
 /*
 ** Init the dir struct
 */
 
 void	init_base(char **av)
 {
-            ft_putstrcolor("init_base();", MAGENTA);
-	g_b.paths = (char**)malloc(sizeof(char*) * tab_len(av));
+            ft_putendlcolor("init_base();", MAGENTA);
+	g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av));
 	g_b.paths[0] = ft_strdup(".");
 	g_b.paths[1] = NULL;
 	set_paths(av);
@@ -33,18 +33,20 @@ void	init_base(char **av)
 
 void	init_dir(t_dir *dir, char *path)
 {
-            ft_putstrcolor("init_dir();", MAGENTA);
+            ft_putendlcolor("init_dir();", MAGENTA);
 	int	i;
 
 	i = 0;
     dir->path = ft_strdup(path);
 	len_dirent(dir);
-	dir->rep = opendir(dir->path);
 	dir->dir_tab = (char **)malloc(sizeof(char *) * (dir->len + 1));
+	dir->rep = opendir(dir->path);
 	while ((dir->dirent = readdir(dir->rep)))
 	{
-		stat(ft_strjoin(dir->path, dir->dirent->d_name), &dir->stat);
-		if (S_ISDIR(dir->stat.st_mode))
+		dir->file_path = get_file_path(path, dir->dirent->d_name);
+		stat(dir->file_path, &dir->stat);
+		if (check_path(dir->file_path) == 2 && ft_strcmp(dir->dirent->d_name, ".") && 
+			ft_strcmp(dir->dirent->d_name, ".."))
 			dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);
 	}
 	closedir(dir->rep);
@@ -57,7 +59,7 @@ void	init_dir(t_dir *dir, char *path)
 
 void	get_names(t_dir *dir)
 {
-            ft_putstrcolor("get_names();", MAGENTA);
+            ft_putendlcolor("get_names();", MAGENTA);
 	int	i;
 
 	i = 0;
@@ -72,7 +74,7 @@ void	get_names(t_dir *dir)
 	closedir(dir->rep);
 	i = tab_len(dir->names);
     dir->display = (char **)malloc(sizeof(char *) * (i + 1));
-    dir->display = ft_cp_tab(dir->display, dir->names, i);
+    dir->display = ft_cp_tab(dir->display, dir->names);
 }
 
 /*
@@ -81,7 +83,7 @@ void	get_names(t_dir *dir)
 
 void	set_paths(char **av)
 {
-            ft_putstrcolor("set_paths();", MAGENTA);
+            ft_putendlcolor("set_paths();", MAGENTA);
 	int		i;
 	int		j;
 
@@ -101,6 +103,6 @@ void	set_paths(char **av)
 				g_b.paths[j++] = ft_strdup(av[i++]);
 		}
 	}
-	g_b.paths[j] = NULL;
+	g_b.paths[j + 1] = NULL;
 }
 

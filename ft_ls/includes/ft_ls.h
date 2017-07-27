@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/25 20:39:57 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/27 22:08:24 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <time.h>
+
 typedef struct		s_dir
 {
 	DIR				*rep;		//Le rep correspondant au path
@@ -24,6 +25,7 @@ typedef struct		s_dir
 	struct stat		stat;		//La struct stat
 	int				len;		//Nombre de fichiers/dossiers
 	char 			*path;		//Le path actuel
+	char			*file_path;	//Le path du file
 	char			**names;	//Tab contenant les noms des fichiers dans l'ordre a afficher
 	char			**display;	//Contient la ligne finale a afficher 
 	char			**dir_tab;	//Tab contenant tous les dirs dans du repertoire courant
@@ -56,5 +58,10 @@ void				error_path(char *arg);
 void				get_names(t_dir *dir);
 void				usage();
 void				display(t_dir *dir);
+void				display_color(t_dir *dir);
+char				*get_file_path(char *path, char *name);
 void				print();
+void				free_tab(char **tab);
+void				basic_sort(t_dir *dir);
+
 #endif

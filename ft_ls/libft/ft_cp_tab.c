@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 16:11:32 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/25 21:49:15 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/27 18:53:31 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 ** Pour copier un tableau dans un autre
 */
 
-char	**ft_cp_tab(char **dst, char **src, int len)
+char	**ft_cp_tab(char **dst, char **src)
 {
 	int		i;
 
 	i = 0;
-	while (i < len)
+	while (src[i])
 	{
 		dst[i] = ft_strdup(src[i]);
 		i++;

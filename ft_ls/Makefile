@@ -6,29 +6,29 @@
 #    By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/08 16:11:48 by vmercadi          #+#    #+#              #
-#    Updated: 2017/07/25 21:53:08 by vmercadi         ###   ########.fr        #
+#    Updated: 2017/07/27 21:24:58 by vmercadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = srcs/main.c srcs/sort.c srcs/utils.c srcs/init.c srcs/test.c srcs/opt1.c \
+SRC = srcs/main.c srcs/utils.c srcs/init.c srcs/test.c srcs/opt1.c \
 		srcs/error.c srcs/check.c
 
-FLAGS = -Wall -Wextra -Werror
+INCLUDES = includes
 
-LIB = libft/libft.a
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
 
 SRCO = $(SRC:%.c=%.o)
 
-INCLUDES = includes
+LIB = libft/libft.a
 
 .PHONY: all re clean
 
 all: $(NAME)
 
-$(NAME):
-	@make re -C libft/
+$(NAME):$(SRCO)
+	@make -C libft/
 	@gcc $(FLAGS) $(SRC) $(LIB) -o $(NAME) -I $(INCLUDES)
 
 clean:
@@ -38,5 +38,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@make fclean -C libft/
+
+ultra: all clean
 
 re: fclean all
