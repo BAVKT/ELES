@@ -19,11 +19,9 @@
 char	*ft_strrchr(const char *str, int c)
 {
 	int		i;
-	char	c2;
 	char	*s;
 
 	s = (char *)str;
-	c2 = c;
 	i = 0;
 	while (s[i])
 		i++;

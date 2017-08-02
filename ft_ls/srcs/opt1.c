@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opt1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/27 22:08:19 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/07/30 23:23:07 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,69 @@
 ** 	Trient mal
 */
 
+/*
+**	Check if the char is uppercase
+*/
 
+int		is_upper(char s)
+{		
+           // ft_putendlcolor("is_upper();", MAGENTA);
+	if (s >= 65 && s <= 90)
+		return (1);
+	return (0);
+}
 
 /*
-** Basic sort is lexicographique
+** Convert normal strings to no-maj string
+*/
+ 
+char	*no_case(char *str)
+{
+            ft_putendlcolor("no_case();", MAGENTA);
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_strnew(ft_strlen(str));
+	while (str[i])
+	{
+		if (is_upper(str[i]))
+			tmp[i] = str[i] + 32;
+		else 
+			tmp[i] = str[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
+}
+
+/*
+** Basic sort is lexicographical and not sensitive to case
 */
 
 void	basic_sort(t_dir *dir)
 {
             ft_putendlcolor("basic_sort();", MAGENTA);
 	int		i;
+	char 	*tmp;
+	char	*tmp2;
 
 	i = 0;
 	while (dir->names[i + 1])
 	{
-		if (ft_strcmp(dir->names[i], dir->names[i + 1]) > 0)
+		tmp = ft_strnew(0);
+		tmp = no_case(dir->names[i]);
+		tmp2 = ft_strnew(0);
+		tmp2 = no_case(dir->names[i + 1]);
+		if (ft_strcmp(tmp, tmp2) > 0)
 		{
 			swap_tab(&dir->names[i], &dir->names[i + 1]);
 			i = 0;
 		}
-		i++;
+		else
+			i++;
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
 	}
 }
 
@@ -103,13 +146,18 @@ void	opt_t(t_dir *dir)
 	int	time;
 
 	i = 0;
-	while (dir->names[i])
+		ft_putendl("AVANT");
+		ft_print_tab(dir->names);
+	while (dir->names[i + 1])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 		stat(dir->file_path, &dir->stat);
 		time = dir->stat.st_mtime;
 		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
 		stat(dir->file_path, &dir->stat);
+			ft_putstr(dir->names[i]);
+			ft_putstr(dir->names[i + 1]);
+			ft_putnbrendl(time - dir->stat.st_mtime);
 		if (dir->stat.st_mtime > time)
 		{
 			swap_tab(&dir->names[i], &dir->names[i + 1]);
@@ -118,6 +166,8 @@ void	opt_t(t_dir *dir)
 		else
 			i++;
 	}
+		ft_putendl("APRES");
+		ft_print_tab(dir->names);
 }
 
 /*
