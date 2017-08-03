@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/28 18:19:55 by vincent          ###   ########.fr       */
+/*   Updated: 2017/08/03 18:53:32 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ char				*get_file_path(char *path, char *name);
 void				print();
 void				free_tab(char **tab);
 void				basic_sort(t_dir *dir);
+int					check_point(char *path);
+void				swap_tab(char **a, char **b);
 
 #endif

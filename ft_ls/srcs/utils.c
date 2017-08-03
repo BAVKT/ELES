@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/27 22:08:24 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/03 18:53:30 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,27 @@ char	*get_file_path(char *path, char *name)
 {
             //ft_putendlcolor("get_file_path();", MAGENTA);
 	char	*tmp;
-
+		
 	if (!ft_strcmp(path, "."))
 		return(name);
 	tmp = ft_strdup(path);
-	tmp = ft_strjoin(path, "/");
+	if (tmp[ft_strlen(path) != '/'])
+		tmp = ft_strjoin(path, "/");
 	tmp = ft_strjoin(tmp, name);
 	return (tmp);
+}
+
+/*
+** Swap 2 char*
+*/
+
+void	swap_tab(char **a, char **b)
+{
+	char	*c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
 }
 
 /*
@@ -102,7 +116,7 @@ void	display(t_dir *dir)
 
 void	display_color(t_dir *dir)
 {
-            ft_putendlcolor("display();", MAGENTA);
+            ft_putendlcolor("display_color();", MAGENTA);
 	int		i;
 	int		j;
 	int		ok;
@@ -110,19 +124,23 @@ void	display_color(t_dir *dir)
 
 	i = 0;
 	j = tab_len(dir->display);
-	tmp = ft_strdup(dir->path);
-	tmp[ft_strlen(dir->path) - 1] = ':';
-	dir->path[ft_strlen(dir->path) - 1] = '\0';
-	ft_putendl(tmp);
+	if (!check_point(dir->path))
+	{
+		tmp = ft_strdup(dir->path);
+		tmp[ft_strlen(dir->path)] = ':';
+		dir->path[ft_strlen(dir->path)] = '\0';
+		ft_putendl(tmp);
+	}
 	while (i < j)
 	{
-		ok = check_path(dir->names[i]);
+		dir->file_path = get_file_path(dir->path, dir->names[i]);
+		ok = check_path(dir->file_path);
 		if (ok == 1)
-			ft_putendl(dir->display[i]);
+			ft_putendl(dir->names[i]);
 		else if (ok == 2)
-			ft_putendlcolor(dir->display[i], CYAN);
+			ft_putendlcolor(dir->names[i], CYAN);
 		else if (ok == 3)
-			ft_putendlcolor(dir->display[i], MAGENTA);
+			ft_putendlcolor(dir->file_path, MAGENTA);
 		i++;
 	}
 }

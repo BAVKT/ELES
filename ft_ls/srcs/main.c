@@ -73,6 +73,8 @@ void	ls(char *path)
     if (ft_strchr(g_b.options, 'R'))
     {
     	i = 0;
+                ft_putendl("YO");
+                ft_print_tab(dir.dir_tab);
         while (dir.dir_tab[i])
     		ls(get_file_path(path, dir.dir_tab[i++]));
         //faire un truc pour free dans le while genre :

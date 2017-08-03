@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   opt1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/07/30 23:23:07 by vincent          ###   ########.fr       */
+/*   Updated: 2017/08/03 18:54:21 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-
-/**
-** PROBLEMES DANS BASIC_SORT
-**	Et opt_r
-** 	Trient mal
-*/
 
 /*
 **	Check if the char is uppercase
@@ -63,25 +56,25 @@ void	basic_sort(t_dir *dir)
 {
             ft_putendlcolor("basic_sort();", MAGENTA);
 	int		i;
-	char 	*tmp;
-	char	*tmp2;
+	// char 	*tmp;
+	// char	*tmp2;
 
 	i = 0;
 	while (dir->names[i + 1])
 	{
-		tmp = ft_strnew(0);
-		tmp = no_case(dir->names[i]);
-		tmp2 = ft_strnew(0);
-		tmp2 = no_case(dir->names[i + 1]);
-		if (ft_strcmp(tmp, tmp2) > 0)
+		// tmp = ft_strnew(0);
+		// tmp = no_case(dir->names[i]);
+		// tmp2 = ft_strnew(0);
+		// tmp2 = no_case(dir->names[i + 1]);
+		if (ft_strcmp(dir->names[i], dir->names[i + 1]) > 0)
 		{
 			swap_tab(&dir->names[i], &dir->names[i + 1]);
 			i = 0;
 		}
 		else
 			i++;
-		ft_strdel(&tmp);
-		ft_strdel(&tmp2);
+		// ft_strdel(&tmp);
+		// ft_strdel(&tmp2);
 	}
 }
 
