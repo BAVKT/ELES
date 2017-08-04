@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/03 18:54:21 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/04 15:22:58 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,6 @@ void	opt_t(t_dir *dir)
 	int	time;
 
 	i = 0;
-		ft_putendl("AVANT");
-		ft_print_tab(dir->names);
 	while (dir->names[i + 1])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
@@ -148,9 +146,6 @@ void	opt_t(t_dir *dir)
 		time = dir->stat.st_mtime;
 		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
 		stat(dir->file_path, &dir->stat);
-			ft_putstr(dir->names[i]);
-			ft_putstr(dir->names[i + 1]);
-			ft_putnbrendl(time - dir->stat.st_mtime);
 		if (dir->stat.st_mtime > time)
 		{
 			swap_tab(&dir->names[i], &dir->names[i + 1]);
@@ -159,8 +154,6 @@ void	opt_t(t_dir *dir)
 		else
 			i++;
 	}
-		ft_putendl("APRES");
-		ft_print_tab(dir->names);
 }
 
 /*
@@ -191,6 +184,26 @@ void	opt_r(t_dir *dir)
 		i++;
 	}
 	free_tab(rev);
+}
+
+/*
+** -R Option
+*/
+
+void	opt_R(t_dir *dir)
+{
+	int i;
+
+    i = 0;
+    dir->names = ft_cp_tab(dir->names, dir->dir_tab);
+    !ft_strchr(g_b.options, 't') ? i = 0 : opt_t(dir);
+    !ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);
+    dir->dir_tab = ft_cp_tab(dir->dir_tab, dir->names);
+    while (dir->dir_tab[i])
+    	ls(get_file_path(dir->path, dir->dir_tab[i++]));
+    	//faire un truc pour free dans le while genre :
+        //ft_strdel(&dir.dir_tab[i]) et mettre le i++ apres
+        //puis un ft strdel sur dir.dir_tab   
 }
 
 /*

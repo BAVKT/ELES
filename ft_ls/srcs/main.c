@@ -61,7 +61,6 @@ void	ls(char *path)
 	t_dir	dir;
 	int		i;
 
-
 	init_dir(&dir, path);
     ft_strchr(g_b.options, 'a') ? opt_a(&dir) : get_names(&dir);
     basic_sort(&dir);
@@ -70,17 +69,7 @@ void	ls(char *path)
     !ft_strchr(g_b.options, 'l') ? i = 0 : opt_l(&dir);
     ft_cp_tab(dir.display, dir.names);
     display_color(&dir);
-    if (ft_strchr(g_b.options, 'R'))
-    {
-    	i = 0;
-                ft_putendl("YO");
-                ft_print_tab(dir.dir_tab);
-        while (dir.dir_tab[i])
-    		ls(get_file_path(path, dir.dir_tab[i++]));
-        //faire un truc pour free dans le while genre :
-        //ft_strdel(&dir.dir_tab[i]) et mettre le i++ apres
-        //puis un ft strdel sur dir.dir_tab   
-    }
+    !ft_strchr(g_b.options, 'R') ? i = 0 : opt_R(&dir);
 }
 
 int		main(int ac, char **av)

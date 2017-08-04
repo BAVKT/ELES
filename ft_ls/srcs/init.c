@@ -46,17 +46,11 @@ void	init_dir(t_dir *dir, char *path)
 	{
 		dir->file_path = get_file_path(path, dir->dirent->d_name);
 		stat(dir->file_path, &dir->stat);
-		if (check_path(dir->file_path) == 2 && !check_point(dir->dirent->d_name))
-		{
-					
-			ft_putendl("ADSASFASFASDF");
+		if (check_path(dir->file_path) == 2 && !check_point(dir->dirent->d_name))		
 			dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);
-		}
 	}
 	closedir(dir->rep);
 	dir->dir_tab[i] = NULL;
-			ft_putnbrendl(i);
-			ft_print_tab(dir->dir_tab);
 }
 
 /*
