@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/04 15:05:15 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/04 16:23:12 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void				opt_a(t_dir *dir);
 void				opt_R(t_dir *dir);
 void				opt_r(t_dir *dir);
 void				opt_t(t_dir *dir);
-void				opt_l();
+void				opt_l(t_dir *dir);
 int					check_path(char *path);
 void				error_path(char *arg);
 void				get_names(t_dir *dir);
