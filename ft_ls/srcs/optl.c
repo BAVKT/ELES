@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/04 16:29:38 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/04 16:31:12 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** Everything that is linked to -l display option.
 ** trouver comment afficher tous les differents modes
+** regarder dasn les fonctions autorisées !!! 
 ** Potentiellement une fonction par mode... 
 */
 
