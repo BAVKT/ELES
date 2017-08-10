@@ -74,15 +74,74 @@ Fonctions autorisées :
 ◦ opendir		//Ouvrir un dossier		DIR* rep; rep = opendir(rep);
 ◦ readdir		//Lire un dossier		dirent = readdir(rep);
 ◦ closedir		//Fermer le dossier		closedir(rep);
-◦ stat			//Récupère l'état du fichier et remplit buf. int stat(const char *path, struct stat *buf); 
-◦ lstat			//identique a stat sauf pour les ln ou il point sur lui meme. int fstat(int fd, struct stat *buf); 
-◦ getpwuid		//
+
+◦ stat			//Récupère l'état du fichier et remplit buf. 
+					int stat(const char *path, struct stat *buf); 
+
+◦ lstat			//identique a stat sauf pour les ln ou il point sur lui meme. 
+					int fstat(int fd, struct stat *buf);
+◦ getpwuid
+	   struct passwd *getpwuid (uid_t uid);
+       La fonction getpwuid() renvoie un pointeur sur une  struc­
+       ture  contenant  les  divers champs de l'enregistrement de
+       /etc/passwd correspondant au à l'ID d'utilisateur uid.
+
+       La structure passwd est définie dans <pwd.h> ainsi :
+
+              struct passwd {
+                char   *pw_name;   /* Nom d'utilisateur             */
+                char   *pw_passwd; /* Mot de passe                  */
+                uid_t   pw_uid;    /* ID de l'utilisateur           */
+                gid_t   pw_gid;    /* ID du groupe de l'utilisateur */
+                char   *pw_gecos;  /* Nom réel de l'utilisateur     */
+                char   *pw_dir;    /* Répertoire de connexion       */
+                char   *pw_shell;  /* Programme Shell de connexion  */
+              };
+
 ◦ getgrgid
+		struct group *getgrgid (gid_t gid);
+       	La fonction getgrnid() renvoie un pointeur  sur  structure
+       	contenant  l'enregistrement  issus  de  /etc/group pour le
+      	 groupe correspondant a l'ID gid.
+
+      	 La structure group est définie dans <grp.h> ainsi :
+
+             	 struct group {
+                   char   *gr_name;    /* Nom du groupe.          */
+                   char   *gr_passwd;  /* Mot de passe du groupe. */
+                   gid_t   gr_gid;     /* ID du groupe.           */
+                   char  **gr_mem;     /* Membres du groupe.      */
+              };
+
 ◦ listxattr
+		Lister les noms des attributs étendus.
+		ssize_t llistxattr (const char *chemin, char *liste, size_t taille);
+		listxattr() récupère la liste des attributs étendus associé avec le chemin indiqué du système
+		de fichier. La liste est l'ensemble des noms (terminés par NULL), l'un après l'autre. 
+		Les noms des attributs étendus auxquels le processus appelant n'a pas accès 
+		peuvent être omis dans la liste. La longueur de la liste de noms d'attributs est renvoyée.
+
 ◦ getxattr
+		ssize_t getxattr (const char *chemin, const char *nom, void *valeur, size_t taille);
+		getxattr() récupère la valeur de l'attribut étendu identifié par le nom et associé au chemin 
+		donné dans le système de fichiers. La longueur de la valeur est renvoyée.
+		Renvoi un nombre positif correspondant à la taille de la valeur de l'attribut étendu.
+
 ◦ time
+		time_t time(time_t *t);
+		time() renvoie l'heure actuelle sous forme du nombre de secondes écoulées depuis le 1er 
+		janvier 1970 à 00h 00m 00s GMT, le début de l'Ère Unix.
+
 ◦ ctime
+		char *ctime(const time_t *timep);
+		La fonction ctime() convertit la date timep en une  chaîne de caractères.
+
 ◦ readlink
+		ssize_t readlink(const char *path, char *buf, size_t bufsiz);
+		Place le contenu du lien symbolique path dans le tampon buf dont la taille est bufsiz. 
+		Il tronquera le contenu si le tampon est trop petit pour recevoir les données.  
+		Renvoie le nombre de caractères placés dans le tampon, ou -1
+
 ◦ malloc
 ◦ free
 ◦ perror
@@ -124,7 +183,45 @@ struct stat {
     time_t    st_mtime;    /* Heure dernière modification */
     time_t    st_ctime;    /* Heure dernier changement état */
 };
+S_ISREG(m)
+un fichier ordinaire ?
+S_ISDIR(m)
+un répertoire ?
+S_ISCHR(m)
+un périphérique en mode caractère ?
+S_ISBLK(m)
+un périphérique en mode bloc ?
+S_ISFIFO(m)
+une FIFO (tube nommé) ?
+S_ISLNK(m)
+un lien symbolique ? (Pas dans POSIX.1-1996).
+S_ISSOCK(m)
+une socket ? (Pas dans POSIX.1-1996).
 
+Les attributs suivants correspondent au champ st_mode :
+S_IFMT	0170000	masque du type de fichier
+S_IFSOCK	0140000	socket
+S_IFLNK	0120000	lien symbolique
+S_IFREG	0100000	fichier ordinaire
+S_IFBLK	0060000	périphérique blocs
+S_IFDIR	0040000	répertoire
+S_IFCHR	0020000	périphérique caractères
+S_IFIFO	0010000	fifo
+S_ISUID	0004000	bit set-UID
+S_ISGID	0002000	bit set-GID (voir plus loin)
+S_ISVTX	0001000	bit « sticky » (voir plus loin)
+S_IRWXU	00700	lecture/écriture/exécution du propriétaire
+S_IRUSR	00400	le propriétaire a le droit de lecture
+S_IWUSR	00200	le propriétaire a le droit d'écriture
+S_IXUSR	00100	le propriétaire a le droit d'exécution
+S_IRWXG	00070	lecture/écriture/exécution du groupe
+S_IRGRP	00040	le groupe a le droit de lecture
+S_IWGRP	00020	le groupe a le droit d'écriture
+S_IXGRP	00010	le groupe a le droit d'exécution
+S_IRWXO	00007	lecture/écriture/exécution des autres
+S_IROTH	00004	les autres ont le droit de lecture
+S_IWOTH	00002	les autres ont le droit d'écriture
+S_IXOTH	00001	les autres ont le droit d'exécution
 
 
 ----------------------------------------------------------------------------------------------------------------------------

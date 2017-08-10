@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:31:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/04 16:38:02 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/10 18:35:46 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 */
 
 /*
-** Use the time of last access isntead of last modification
+** Use the time of last access instead of last modification
 */
 
 void	opt_u()

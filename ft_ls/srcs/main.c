@@ -23,13 +23,17 @@ void	ls(char *path)
 	int		i;
 
 	init_dir(&dir, path);
-    ft_strchr(g_b.options, 'a') ? opt_a(&dir) : get_names(&dir);
+    (ft_strchr(g_b.options, 'a')) ? opt_a(&dir) : get_names(&dir);
     basic_sort(&dir);
     !ft_strchr(g_b.options, 't') ? i = 0 : opt_t(&dir);
     !ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(&dir);
-    !ft_strchr(g_b.options, 'l') ? i = 0 : opt_l(&dir);
-    ft_cp_tab(dir.display, dir.names);
-    display_color(&dir);
+    if (ft_strchr(g_b.options, 'l'))
+    	opt_l(&dir);
+    else
+    {	
+   		ft_cp_tab(dir.display, dir.names);
+   		display_color(&dir);
+    }
     !ft_strchr(g_b.options, 'R') ? i = 0 : opt_R(&dir);
 }
 

@@ -6,21 +6,14 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/04 16:31:12 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/10 18:35:45 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Everything that is linked to -l display option.
-** trouver comment afficher tous les differents modes
-** regarder dasn les fonctions autorisées !!! 
-** Potentiellement une fonction par mode... 
-*/
-
-/*
-If -l for each file : 
+-l for each file : 
 - mode 							st_mode
 - number of links				st_nlink
 - owner (though not for -g)		st_uid
@@ -58,6 +51,64 @@ owner permissions, group permissions, and other permissions.
 //  time_t    st_ctime;    /* Heure dernier changement état */
 //};
 
+
+/*
+** Return the formated permissions of the file
+*/
+
+char	*get_mode(t_dir *dir)
+{
+	char	*str;
+
+	str = ft_strnew(10);
+	if (S_ISDIR(dir->stat.st_mode))
+		str[0] = 'd';
+	else if (S_ISLNK(dir->stat.st_mode))
+		str[0] = 'l'; 
+	else
+		str[0] = '-';
+	str[1] = (dir->stat.st_mode & S_IRUSR) ? 'r' : '-';
+	str[2] = (dir->stat.st_mode & S_IWUSR) ? 'w' : '-';
+	str[3] = (dir->stat.st_mode & S_IXUSR) ? 'x' : '-';
+	str[4] = (dir->stat.st_mode & S_IRGRP) ? 'r' : '-';
+	str[5] = (dir->stat.st_mode & S_IWGRP) ? 'w' : '-';
+	str[6] = (dir->stat.st_mode & S_IXGRP) ? 'x' : '-';
+	str[7] = (dir->stat.st_mode & S_IROTH) ? 'r' : '-';
+	str[8] = (dir->stat.st_mode & S_IWOTH) ? 'w' : '-';
+	str[9] = (dir->stat.st_mode & S_IXOTH) ? 'x' : '-';
+	return (str);
+}
+
+/*
+** Return the file owner's name of the file
+*/
+
+char	*get_owner(t_dir *dir)
+{
+	dir->pwd = *getpwuid(dir->stat.st_uid);
+	return (dir->pwd.pw_name);
+}
+
+/*
+** Return the group owner's name of the file
+*/
+
+char	*get_gid(t_dir *dir)
+{
+	dir->gr = *getgrgid(dir->stat.st_gid);
+	return (dir->gr.gr_name);
+}
+
+/*
+** Return the formated time of the file
+*/
+
+char	*get_time(t_dir *dir)
+{
+
+
+}
+
 /*
 ** -l Option	Give more detailled informations 
 */
@@ -65,25 +116,24 @@ owner permissions, group permissions, and other permissions.
 void	opt_l(t_dir *dir)
 {
             ft_putendlcolor("opt_l();", MAGENTA);
-	int i;
-
+	int		i;
+	
 	i = 0;
 	while (dir->names[i])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 		stat(dir->file_path, &dir->stat);
-		ft_putendl("  ");
-		ft_putstr(dir->stat.st_mode);
-		ft_putendl("  ");
-		ft_putstr(dir->stat.st_nlink);
-		ft_putendl("  ");
-		ft_putstr(dir->stat.st_uid);
-		ft_putendl("  ");
-		ft_putstr(dir->stat.st_gid);
-		ft_putendl("  ");
-		ft_putstr(dir->stat.st_size);
-		ft_putendl("  ");
-		ft_putstr(dir->stat.st_mtime);
+		ft_putstr(get_mode(dir));
+		ft_putstr("  ");
+		ft_putstr(ft_itoa((int)dir->stat.st_nlink));
+		ft_putstr("  ");
+		ft_putstr(get_owner(dir));
+		ft_putstr("  ");
+		ft_putstr(get_gid(dir));
+		ft_putstr("  ");
+		ft_putstr(ft_itoa(dir->stat.st_size));
+		ft_putstr("  ");
+		ft_putstr(get_time(dir));
 		ft_putendl(dir->names[i]);
 		i++;
 	}

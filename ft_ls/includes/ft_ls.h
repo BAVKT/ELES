@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/04 16:23:12 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/10 15:39:14 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <time.h>
+# include <grp.h>
+# include <pwd.h>
+//# include <attr/xattr.h>
 
 typedef struct		s_dir
 {
 	DIR				*rep;		//Le rep correspondant au path
 	struct dirent	*dirent;	//Struct dirent du path
 	struct stat		stat;		//La struct stat
+	struct passwd	pwd;		//Struct password
+	struct group	gr;			//Struct group
 	int				len;		//Nombre de fichiers/dossiers
 	char 			*path;		//Le path actuel
 	char			*file_path;	//Le path du file
