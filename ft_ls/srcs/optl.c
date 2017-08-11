@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/10 18:35:45 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/11 16:44:51 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,60 @@ char	*get_gid(t_dir *dir)
 /*
 ** Return the formated time of the file
 */
-
+/*
 char	*get_time(t_dir *dir)
 {
+	time_t	now;
+	time_t	ti;
+	time_t	final;
+	char	*str;
 
+	now = time(NULL);
+	ti = dir->stat.st_mtime;
+	str = ctime(&ti);
+	final = now - ti;
+	ft_putchar(' ');
+	ft_putnstr(&(str[4]), 6);
+	ft_putchar(' ');
+	if (final < (-3600 * 24 * 30.5 * 6) || final > (3600 * 24 * 30.5 * 6))
+	{
+		ft_putchar(' ');
+		ft_putnstr(&(str[20]), 4);
+	}
+	else
+	{
+		ft_putnstr(&(str[11]), 5);
+		ft_putchar(' ');
+	}
+	return (str);
+}
+*/
+/*
+char	*get_time(t_dir *dir)
+{
+	time_t	now;
 
+}
+*/
+char	*get_time(t_dir *dir)
+{
+	time_t	now;
+	time_t	ti;
+	char	*str;
+	char	*tmp;
+	char	*tmp2;
+
+	now = time(NULL);
+	ti = dir->stat.st_mtime;
+	tmp = ctime(&ti);
+	tmp2 = ft_strnew(0);
+	str = ft_strnew(0);
+	ti = now - ti;
+	if (ti > 15778800 || ti < 0)
+		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 17);
+	else
+		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 12);
+	return (str = ft_strjoin_free(str, tmp2));
 }
 
 /*
@@ -134,6 +183,7 @@ void	opt_l(t_dir *dir)
 		ft_putstr(ft_itoa(dir->stat.st_size));
 		ft_putstr("  ");
 		ft_putstr(get_time(dir));
+		ft_putstr("  ");
 		ft_putendl(dir->names[i]);
 		i++;
 	}
