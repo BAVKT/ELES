@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tab.c                                         :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/13 15:24:59 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 15:25:35 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/08/13 15:30:43 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/08/13 16:10:58 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 /*
-** Swap 2 tab blocks
+** Free a tab
 */
 
-void	swap_tab(void **a, void **b)
+void	free_tab(void **tab)
 {
-	void	*c;
+	int	i;
 
-	c = *a;
-	*a = *b;
-	*b = c;
+	i = 0;
+	while (tab[i])
+		ft_strdel((char**)&tab[i++]);
+	ft_memdel((void**)tab);
 }

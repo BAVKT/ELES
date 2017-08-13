@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tab.c                                         :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/13 15:24:59 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 15:25:35 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/08/13 15:19:20 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/08/13 15:50:28 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Swap 2 tab blocks
+**	Check if the char is uppercase
 */
 
-void	swap_tab(void **a, void **b)
+int		is_upper(char s)
 {
-	void	*c;
-
-	c = *a;
-	*a = *b;
-	*b = c;
+	if (s >= 65 && s <= 90)
+		return (1);
+	return (0);
 }

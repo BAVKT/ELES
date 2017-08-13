@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tab.c                                         :+:      :+:    :+:   */
+/*   tab_len.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/13 15:24:59 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 15:25:35 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/08/13 15:22:27 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/08/13 16:10:22 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 /*
-** Swap 2 tab blocks
+** donne le nombre de str dans un char**
 */
 
-void	swap_tab(void **a, void **b)
+int		tab_len(char **tab)
 {
-	void	*c;
+	int		i;
 
-	c = *a;
-	*a = *b;
-	*b = c;
+	i = 0;
+	while (tab[i] != NULL)
+		i++;
+	return (i);
 }

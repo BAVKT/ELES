@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/10 15:39:14 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 16:09:51 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void				init_base(char **av);
 void				init_dir(t_dir *dir, char *path);
 void				set_paths(char **av);
 int					len_dirent(t_dir *dir);
-int					tab_len(char **tab);
 char				**lexico_sort(char **tab);
 char				*opt_tab(char **av);
 void				opt_a(t_dir *dir);
@@ -66,9 +65,14 @@ void				display(t_dir *dir);
 void				display_color(t_dir *dir);
 char				*get_file_path(char *path, char *name);
 void				print();
-void				free_tab(char **tab);
 void				basic_sort(t_dir *dir);
 int					check_point(char *path);
-void				swap_tab(char **a, char **b);
+char				*get_mode(t_dir *dir);
+char				*get_owner(t_dir *dir);
+char				*get_gid(t_dir *dir);
+char				*get_time(t_dir *dir);
+int					*get_spaces(t_dir *dir);
+int					get_int_spaces(int nb);
+
 
 #endif

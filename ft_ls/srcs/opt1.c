@@ -6,46 +6,11 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/11 16:44:53 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 16:08:33 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/*
-**	Check if the char is uppercase
-*/
-
-int		is_upper(char s)
-{		
-	if (s >= 65 && s <= 90)
-		return (1);
-	return (0);
-}
-
-/*
-** Convert normal strings to no-maj string
-*/
- 
-char	*no_case(char *str)
-{
-            ft_putendlcolor("no_case();", MAGENTA);
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = ft_strnew(ft_strlen(str));
-	while (str[i])
-	{
-		if (is_upper(str[i]))
-			tmp[i] = str[i] + 32;
-		else 
-			tmp[i] = str[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
-}
 
 /*
 ** Basic sort is lexicographical and not sensitive to case
@@ -61,7 +26,7 @@ void	basic_sort(t_dir *dir)
 	{
 		if (ft_strcmp(dir->names[i], dir->names[i + 1]) > 0)
 		{
-			swap_tab(&dir->names[i], &dir->names[i + 1]);
+			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
 			i = 0;
 		}
 		else
@@ -139,7 +104,7 @@ void	opt_t(t_dir *dir)
 		stat(dir->file_path, &dir->stat);
 		if (dir->stat.st_mtime > time)
 		{
-			swap_tab(&dir->names[i], &dir->names[i + 1]);
+			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
 			i = 0;
 		}
 		else
@@ -175,7 +140,7 @@ void	opt_r(t_dir *dir)
 		dir->names[i] = ft_strdup(rev[i]);
 		i++;
 	}
-	free_tab(rev);
+	free_tab((void **)rev);
 }
 
 /*

@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tab.c                                         :+:      :+:    :+:   */
+/*   repeat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/13 15:24:59 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 15:25:35 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/08/13 15:21:23 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/08/13 15:23:27 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 /*
-** Swap 2 tab blocks
+** Return a str with a repetition of n char c
 */
 
-void	swap_tab(void **a, void **b)
+char	*repeat(int n, char c)
 {
-	void	*c;
+	char *str;
 
-	c = *a;
-	*a = *b;
-	*b = c;
+	str = ft_strnew(n);
+	while (n >= 0)
+		str[n--] = c;
+	return (str);
 }

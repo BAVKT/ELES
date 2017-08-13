@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/11 16:44:51 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 17:19:19 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,41 +102,7 @@ char	*get_gid(t_dir *dir)
 /*
 ** Return the formated time of the file
 */
-/*
-char	*get_time(t_dir *dir)
-{
-	time_t	now;
-	time_t	ti;
-	time_t	final;
-	char	*str;
 
-	now = time(NULL);
-	ti = dir->stat.st_mtime;
-	str = ctime(&ti);
-	final = now - ti;
-	ft_putchar(' ');
-	ft_putnstr(&(str[4]), 6);
-	ft_putchar(' ');
-	if (final < (-3600 * 24 * 30.5 * 6) || final > (3600 * 24 * 30.5 * 6))
-	{
-		ft_putchar(' ');
-		ft_putnstr(&(str[20]), 4);
-	}
-	else
-	{
-		ft_putnstr(&(str[11]), 5);
-		ft_putchar(' ');
-	}
-	return (str);
-}
-*/
-/*
-char	*get_time(t_dir *dir)
-{
-	time_t	now;
-
-}
-*/
 char	*get_time(t_dir *dir)
 {
 	time_t	now;
@@ -159,31 +125,33 @@ char	*get_time(t_dir *dir)
 }
 
 /*
-** -l Option	Give more detailled informations 
+** -l Option	Give more detailled informations
 */
 
 void	opt_l(t_dir *dir)
 {
             ft_putendlcolor("opt_l();", MAGENTA);
-	int		i;
-	
+	int	i;
+	int	*tab;
+
 	i = 0;
+	tab = get_spaces(dir);
 	while (dir->names[i])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 		stat(dir->file_path, &dir->stat);
 		ft_putstr(get_mode(dir));
-		ft_putstr("  ");
+		ft_putstr(repeat((tab[0] - ft_strlen(get_mode(dir))), ' '));
 		ft_putstr(ft_itoa((int)dir->stat.st_nlink));
-		ft_putstr("  ");
+		ft_putstr(repeat(tab[1] - get_int_spaces((int)dir->stat.st_nlink), ' '));
 		ft_putstr(get_owner(dir));
-		ft_putstr("  ");
+		ft_putstr(repeat(tab[2] - ft_strlen(get_owner(dir)), ' '));
 		ft_putstr(get_gid(dir));
-		ft_putstr("  ");
+		ft_putstr(repeat(tab[3] - ft_strlen(get_gid(dir)), ' '));
 		ft_putstr(ft_itoa(dir->stat.st_size));
-		ft_putstr("  ");
+		ft_putstr(repeat(tab[4] - get_int_spaces((int)dir->stat.st_size), ' '));
 		ft_putstr(get_time(dir));
-		ft_putstr("  ");
+		ft_putstr(" ");
 		ft_putendl(dir->names[i]);
 		i++;
 	}

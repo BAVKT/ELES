@@ -149,6 +149,13 @@ Fonctions autorisées :
 ◦ exit
 + d'autres pour les bonus SI JUSTIFIED comme tcgetattr
 
+
+
+
+rvievill [7:03 PM] 
+Dans le cas du -l les lien symbolique sont considéré comme des fichier du coup tu dois pas check le cible
+Genre ton lien pointe sur un répertoire ba si tu check la cible se sera un répertoire et non un lien alors qu'avec le -l faut que se sois un lien
+
 ----------------------------------------------------------------------------------------------------------------------------
 ############################################################################################################################
 ----------------------------------------------------------------------------------------------------------------------------
@@ -234,32 +241,6 @@ RECHERCHES ET LIENS
 
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
-char	*get_time(t_dir *dir)
-{
-	time_t	now;
-	time_t	time;
-	time_t	final;
-	char	*str;
-
-	now = time(NULL);
-	time = dir->stat->st_mtime;
-	str = ctime(&time);
-	final = now - time;
-	ft_putchar(' ');
-	ft_putnstr(&(str[4]), 6);
-	ft_putchar(' ');
-	if (final < (-3600 * 24 * 30.5 * 6) || final > (3600 * 24 * 30.5 * 6))
-	{
-		ft_putchar(' ');
-		ft_putnstr(&(str[20]), 4);
-	}
-	else
-	{
-		ft_putnstr(&(str[11]), 5);
-		ft_putchar(' ');
-	}
-	return (str);
-}
 
 
 

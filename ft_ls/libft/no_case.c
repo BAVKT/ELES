@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tab.c                                         :+:      :+:    :+:   */
+/*   no_case.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/13 15:24:59 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 15:25:35 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/08/13 15:20:43 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/08/13 15:49:13 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 /*
-** Swap 2 tab blocks
+** Convert normal strings to no-maj string
 */
 
-void	swap_tab(void **a, void **b)
+char	*no_case(char *str)
 {
-	void	*c;
+	char	*tmp;
+	int		i;
 
-	c = *a;
-	*a = *b;
-	*b = c;
+	i = 0;
+	tmp = ft_strnew(ft_strlen(str));
+	while (str[i])
+	{
+		if (is_upper(str[i]))
+			tmp[i] = str[i] + 32;
+		else
+			tmp[i] = str[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
 }
