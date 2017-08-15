@@ -35,19 +35,39 @@ void	init_base(char **av)
 void	init_dir(t_dir *dir, char *path)
 {
             ft_putendlcolor("init_dir();", MAGENTA);
-	int	i;
-
-	i = 0;
     dir->path = ft_strdup(path);
 	len_dirent(dir);
 	dir->dir_tab = (char **)malloc(sizeof(char *) * (dir->len + 1));
-	dir->rep = opendir(dir->path);
+	get_dir_tab(dir);
+}
+
+/*
+** Set the dir_tab
+*/
+
+void	get_dir_tab(t_dir *dir)
+{
+            ft_putendlcolor("get_dir_tab();", MAGENTA);
+	int	i;
+
+	i = 0;
+	if(!(dir->rep = opendir(dir->path)))
+	{
+		error((ft_strrchr(dir->path, '/')) + 1, 2);
+		dir->dir_tab[i] = NULL;
+		return ;
+	}
 	while ((dir->dirent = readdir(dir->rep)))
 	{
-		dir->file_path = get_file_path(path, dir->dirent->d_name);
-		stat(dir->file_path, &dir->stat);
-		if (check_path(dir->file_path) == 2 && !check_point(dir->dirent->d_name))		
-			dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);
+		dir->file_path = get_file_path(dir->path, dir->dirent->d_name);
+		lstat(dir->file_path, &dir->stat);
+		if (check_path(dir->file_path) == 2)
+		{
+			if (ft_strchr(g_b.options, 'a') && !check_point(dir->dirent->d_name))
+				dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);
+			else if (dir->dirent->d_name[0] != '.')
+				dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);				
+		}
 	}
 	closedir(dir->rep);
 	dir->dir_tab[i] = NULL;

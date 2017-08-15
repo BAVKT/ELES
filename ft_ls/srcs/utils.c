@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 16:05:04 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 19:38:14 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		len_dirent(t_dir *dir)
 {
             ft_putendlcolor("len_dirent();", MAGENTA);
 	dir->len = 0;
-	dir->rep = opendir(dir->path);
+	if(!(dir->rep = opendir(dir->path)))
+		return(0);
 	while ((dir->dirent = readdir(dir->rep)))
 		dir->len++;
 	closedir(dir->rep);
@@ -31,8 +32,8 @@ int		len_dirent(t_dir *dir)
 ** Return the size in spaces needed for the int in arg
 */
 
-int		get_int_spaces(int nb)
-{
+int		get_int_space(int nb)
+{			
             //ft_putendlcolor("get_int_spaces();", MAGENTA);
 	int	i;
 
@@ -46,7 +47,7 @@ int		get_int_spaces(int nb)
 }
 
 /*
-** Return a tab with the good number of spaces for each
+** Return a tab with the good number of spaces for eache
 */
 
 int		*get_spaces(t_dir *dir)
@@ -65,14 +66,12 @@ int		*get_spaces(t_dir *dir)
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 		stat(dir->file_path, &dir->stat);
-		tab[0] = ((nb = ft_strlen(get_mode(dir))) > tab[0]) ? nb : tab[0];
-		tab[1] = ((nb = get_int_spaces(dir->stat.st_nlink)) > tab[1]) ?
-			nb : tab[1];
-		tab[2] = ((nb = ft_strlen(get_owner(dir))) > tab[2]) ? nb : tab[2];
-		tab[3] = ((nb = ft_strlen(get_gid(dir))) > tab[3]) ? nb : tab[3];
-		tab[4] = ((nb = get_int_spaces(dir->stat.st_size)) > tab[4]) ?
-			nb : tab[4];
-		tab[5] = ((nb = ft_strlen(get_time(dir))) > tab[5]) ? nb : tab[5];
+		tab[0] = ((nb = ft_strlen(mode(dir))) > tab[0]) ? nb : tab[0];
+		tab[1] = ((nb = get_int_space(dir->stat.st_nlink)) > tab[1]) ? nb : tab[1];
+		tab[2] = ((nb = ft_strlen(owner(dir))) > tab[2]) ? nb : tab[2];
+		tab[3] = ((nb = ft_strlen(gid(dir))) > tab[3]) ? nb : tab[3];
+		tab[4] = ((nb = get_int_space(dir->stat.st_size)) > tab[4]) ? nb : tab[4];
+		tab[5] = ((nb = ft_strlen(mtime(dir))) > tab[5]) ? nb : tab[5];
 		i++;
 	}
 	return (tab);
@@ -102,9 +101,9 @@ char	*get_file_path(char *path, char *name)
 
 void	display(t_dir *dir)
 {
-            ft_putendlcolor("display();", MAGENTA);
-	int	i;
-	int	j;
+            ft_putendlcolor("display()", MAGENTA);
+	int		i;
+	int		j;
 	char	*tmp;
 
 	i = 0;
@@ -116,7 +115,7 @@ void	display(t_dir *dir)
 		ft_putendl(tmp);
 	}
 	while (i < j)
-		ft_putendl(dir->display[i]);
+		ft_putendl(dir->display[i++]);
 }
 
 /*

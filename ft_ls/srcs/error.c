@@ -13,6 +13,22 @@
 #include "ft_ls.h"
 
 /*
+** When you can't open a dir
+*/
+
+int		error(char *name, int e)
+{
+	ft_putstr("./ft_ls: ");
+	ft_putstr(name);
+	ft_putstr(": ");
+	if (e == 1)
+		ft_putendl("Bad file descriptor");
+	else if (e == 2)
+		ft_putendl("Permission denied");
+	return(0);
+}
+
+/*
 ** Error if path does not exist
 */
 

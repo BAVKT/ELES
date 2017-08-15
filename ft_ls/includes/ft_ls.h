@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 16:09:51 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 19:30:47 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <time.h>
 # include <grp.h>
 # include <pwd.h>
+# include <stdio.h>
+#include <errno.h>
 //# include <attr/xattr.h>
 
 typedef struct		s_dir
@@ -57,22 +59,26 @@ void				opt_R(t_dir *dir);
 void				opt_r(t_dir *dir);
 void				opt_t(t_dir *dir);
 void				opt_l(t_dir *dir);
+void				opt_u(t_dir *dir);
 int					check_path(char *path);
 void				error_path(char *arg);
-void				get_names(t_dir *dir);
+int					error(char *name, int e);
 void				usage();
+void				get_names(t_dir *dir);
 void				display(t_dir *dir);
 void				display_color(t_dir *dir);
 char				*get_file_path(char *path, char *name);
-void				print();
 void				basic_sort(t_dir *dir);
 int					check_point(char *path);
-char				*get_mode(t_dir *dir);
-char				*get_owner(t_dir *dir);
-char				*get_gid(t_dir *dir);
-char				*get_time(t_dir *dir);
+char				*mode(t_dir *dir);
+char				*owner(t_dir *dir);
+char				*gid(t_dir *dir);
+char				*mtime(t_dir *dir);
 int					*get_spaces(t_dir *dir);
-int					get_int_spaces(int nb);
-
+int					get_int_space(int nb);
+void				clean_base();
+void				clean_sdir(t_dir *dir);
+void				print_blocks(t_dir *dir);
+void				get_dir_tab(t_dir *dir);
 
 #endif

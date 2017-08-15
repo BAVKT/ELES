@@ -12,10 +12,41 @@ LS note maison
 ##############
 -g3 -fsanitize=address pour debug
 
-On peut utiliser s_isdir ou s_isreg pour savoir si c'est un dossier ou fichier.
-On leur passe le mode_t du stat.
-Plus ici : https://www.gnu.org/software/libc/manual/html_node/Testing-File-Type.html
-S_ISDIR(stat.st_mode)	//return 0 si c'est pas un dir
+
+
+RESTE A FAIRE :
+
+- Affichage liens symboliques
+- Tri du temps en -l
+	+ Affichage qui bug sur le temps parfois
+- Sticky bits
+- Specials chars
+- Gérer les @
+- Probleme avec le -t sur ./ft_ls -lRat ~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,12 +6,12 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 17:19:19 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 19:38:12 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
+	
 /*
 -l for each file : 
 - mode 							st_mode
@@ -33,30 +33,56 @@ If file is a symbolic link, the pathname of the linked-to file is preceded by �
 The file mode printed under the -l options consists of the entry type, 
 owner permissions, group permissions, and other permissions. 
 */
+/*
+** Return the file owner's name of the file
+*/
 
+char	*owner(t_dir *dir)
+{
+	dir->pwd = *getpwuid(dir->stat.st_uid);
+	return (dir->pwd.pw_name);
+}
 
-//struct stat {
-//  dev_t     st_dev;      /* ID du périphérique contenant le fichier */
-//  ino_t     st_ino;      /* Numéro inœud */
-//  mode_t    st_mode;     /* Protection */
-//  nlink_t   st_nlink;    /* Nb liens matériels */
-//  uid_t     st_uid;      /* UID propriétaire */
-//  gid_t     st_gid;      /* GID propriétaire */
-//  dev_t     st_rdev;     /* ID périphérique (si fichier spécial) */
-//  off_t     st_size;     /* Taille totale en octets */
-//  blksize_t st_blksize;  /* Taille de bloc pour E/S */
-//  blkcnt_t  st_blocks;   /* Nombre de blocs alloués */
-//  time_t    st_atime;    /* Heure dernier accès */
-//  time_t    st_mtime;    /* Heure dernière modification */
-//  time_t    st_ctime;    /* Heure dernier changement état */
-//};
+/*
+** Return the group owner's name of the file
+*/
 
+char	*gid(t_dir *dir)
+{
+	dir->gr = *getgrgid(dir->stat.st_gid);
+	return (dir->gr.gr_name);
+}
+
+/*
+** Return the formated time of the file
+*/
+
+char	*mtime(t_dir *dir)
+{
+	time_t	now;
+	time_t	ti;
+	char	*str;
+	char	*tmp;
+	char	*tmp2;
+
+	now = time(NULL);
+	ti = dir->stat.st_mtime;
+	tmp = ctime(&ti);
+	tmp2 = ft_strnew(0);
+	str = ft_strnew(0);
+	ti = now - ti;
+	if (ti > 15778800 || ti < 0)
+		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 15);
+	else
+		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 12);
+	return (str = ft_strjoin_free(str, tmp2));
+}
 
 /*
 ** Return the formated permissions of the file
 */
 
-char	*get_mode(t_dir *dir)
+char	*mode(t_dir *dir)
 {
 	char	*str;
 
@@ -64,7 +90,7 @@ char	*get_mode(t_dir *dir)
 	if (S_ISDIR(dir->stat.st_mode))
 		str[0] = 'd';
 	else if (S_ISLNK(dir->stat.st_mode))
-		str[0] = 'l'; 
+		str[0] = 'l';
 	else
 		str[0] = '-';
 	str[1] = (dir->stat.st_mode & S_IRUSR) ? 'r' : '-';
@@ -80,48 +106,25 @@ char	*get_mode(t_dir *dir)
 }
 
 /*
-** Return the file owner's name of the file
+** display the number of blocks in the directory
 */
 
-char	*get_owner(t_dir *dir)
+void	print_blocks(t_dir *dir)
 {
-	dir->pwd = *getpwuid(dir->stat.st_uid);
-	return (dir->pwd.pw_name);
-}
+	int	i;
+	int	nb;
 
-/*
-** Return the group owner's name of the file
-*/
-
-char	*get_gid(t_dir *dir)
-{
-	dir->gr = *getgrgid(dir->stat.st_gid);
-	return (dir->gr.gr_name);
-}
-
-/*
-** Return the formated time of the file
-*/
-
-char	*get_time(t_dir *dir)
-{
-	time_t	now;
-	time_t	ti;
-	char	*str;
-	char	*tmp;
-	char	*tmp2;
-
-	now = time(NULL);
-	ti = dir->stat.st_mtime;
-	tmp = ctime(&ti);
-	tmp2 = ft_strnew(0);
-	str = ft_strnew(0);
-	ti = now - ti;
-	if (ti > 15778800 || ti < 0)
-		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 17);
-	else
-		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 12);
-	return (str = ft_strjoin_free(str, tmp2));
+	i = 0;
+	nb = 0;
+	while (dir->names[i])
+	{
+		dir->file_path = get_file_path(dir->path, dir->names[i]);
+		lstat(dir->file_path, &dir->stat);
+		nb += dir->stat.st_blocks;
+		i++;
+	}
+	ft_putstr("total ");
+	ft_putnbrendl(nb);
 }
 
 /*
@@ -136,21 +139,22 @@ void	opt_l(t_dir *dir)
 
 	i = 0;
 	tab = get_spaces(dir);
+	print_blocks(dir);
 	while (dir->names[i])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 		stat(dir->file_path, &dir->stat);
-		ft_putstr(get_mode(dir));
-		ft_putstr(repeat((tab[0] - ft_strlen(get_mode(dir))), ' '));
+		ft_putstr(mode(dir));
+		ft_putstr(repeat((tab[0] - ft_strlen(mode(dir))), ' '));
 		ft_putstr(ft_itoa((int)dir->stat.st_nlink));
-		ft_putstr(repeat(tab[1] - get_int_spaces((int)dir->stat.st_nlink), ' '));
-		ft_putstr(get_owner(dir));
-		ft_putstr(repeat(tab[2] - ft_strlen(get_owner(dir)), ' '));
-		ft_putstr(get_gid(dir));
-		ft_putstr(repeat(tab[3] - ft_strlen(get_gid(dir)), ' '));
+		ft_putstr(repeat(tab[1] - get_int_space((int)dir->stat.st_nlink), ' '));
+		ft_putstr(owner(dir));
+		ft_putstr(repeat(tab[2] - ft_strlen(owner(dir)), ' '));
+		ft_putstr(gid(dir));
+		ft_putstr(repeat(tab[3] - ft_strlen(gid(dir)), ' '));
 		ft_putstr(ft_itoa(dir->stat.st_size));
-		ft_putstr(repeat(tab[4] - get_int_spaces((int)dir->stat.st_size), ' '));
-		ft_putstr(get_time(dir));
+		ft_putstr(repeat(tab[4] - get_int_space((int)dir->stat.st_size), ' '));
+		ft_putstr(mtime(dir));
 		ft_putstr(" ");
 		ft_putendl(dir->names[i]);
 		i++;

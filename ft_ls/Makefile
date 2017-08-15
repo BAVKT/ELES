@@ -6,14 +6,14 @@
 #    By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/08 16:11:48 by vmercadi          #+#    #+#              #
-#    Updated: 2017/08/10 14:11:59 by vmercadi         ###   ########.fr        #
+#    Updated: 2017/08/13 18:16:00 by vmercadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = srcs/main.c srcs/utils.c srcs/init.c srcs/test.c srcs/opt1.c \
-		srcs/error.c srcs/check.c srcs/optl.c srcs/bonus.c
+SRC = srcs/main.c srcs/utils.c srcs/init.c srcs/opt1.c srcs/error.c \
+		srcs/check.c srcs/optl.c srcs/bonus.c srcs/clean.c \
 
 INCLUDES = includes
 

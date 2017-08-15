@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:31:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/11 16:44:53 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/13 19:38:13 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,30 @@
 ** Use the time of last access instead of last modification
 */
 
-void	opt_u()
+void	opt_u(t_dir *dir)
 {
+            ft_putendlcolor("opt_u();", MAGENTA);
+	int	i;
+	int	time;
 
+	i = 0;
+	while (dir->names[i + 1])
+	{
+		dir->file_path = get_file_path(dir->path, dir->names[i]);
+		lstat(dir->file_path, &dir->stat);
+		time = dir->stat.st_atime;
+		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
+		lstat(dir->file_path, &dir->stat);
+		if (dir->stat.st_atime > time)
+		{
+			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
+			i = 0;
+		}
+		else
+			i++;
+	}
 }
+
 
 /*
 ** Output is not sorted.  This option turns on the -a option
