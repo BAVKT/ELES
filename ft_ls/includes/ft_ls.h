@@ -20,7 +20,8 @@
 # include <grp.h>
 # include <pwd.h>
 # include <stdio.h>
-#include <errno.h>
+# include <errno.h>
+# include <limits.h>
 //# include <attr/xattr.h>
 
 typedef struct		s_dir
@@ -35,7 +36,7 @@ typedef struct		s_dir
 	char			*file_path;	//Le path du file
 	char			**names;	//Tab contenant les noms des fichiers dans l'ordre a afficher
 	char			**display;	//Contient la ligne finale a afficher 
-	char			**dir_tab;	//Tab contenant tous les dirs dans du repertoire courant
+	char			**dir_tab;	//Tab contenant tous les dirs du repertoire courant
 }					t_dir;
 
 typedef struct		s_base
@@ -80,5 +81,7 @@ void				clean_base();
 void				clean_sdir(t_dir *dir);
 void				print_blocks(t_dir *dir);
 void				get_dir_tab(t_dir *dir);
+int					display_file(t_dir *dir);
+void				print_l(t_dir *dir);
 
 #endif

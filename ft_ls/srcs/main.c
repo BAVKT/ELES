@@ -18,11 +18,13 @@
 
 void	ls(char *path)
 {
-              ft_putendlcolor("ls();", MAGENTA);
-        t_dir	dir;
+            ft_putendlcolor("ls();", MAGENTA);
+    t_dir	dir;
     int		i;
     
     init_dir(&dir, path);
+    if (display_file(&dir))
+        return ;
     if (dir.len)
     {
         (ft_strchr(g_b.options, 'a')) ? opt_a(&dir) : get_names(&dir);

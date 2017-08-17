@@ -106,7 +106,7 @@ char	*mode(t_dir *dir)
 }
 
 /*
-** display the number of blocks in the directory
+** Display the total number of blocks in the directory
 */
 
 void	print_blocks(t_dir *dir)
@@ -128,22 +128,43 @@ void	print_blocks(t_dir *dir)
 }
 
 /*
-** -l Option	Give more detailled informations
+** Return the complete name to display (work for for symbolic link too)
 */
 
-void	opt_l(t_dir *dir)
+char	*name(t_dir *dir, int i)
 {
-            ft_putendlcolor("opt_l();", MAGENTA);
+            //ft_putendlcolor("name();", MAGENTA);
+	char	*str;
+	char	*buf;
+	int		size;
+
+	size = PATH_MAX;
+	buf = ft_strnew(size);
+	str = ft_strdup(dir->names[i]);
+	readlink(dir->file_path, buf, size);
+	if (check_path(dir->file_path) == 3)
+	{
+		str = ft_strjoin_free(str, " -> ");
+		str = ft_strjoin_free(str, buf);
+	}
+	return (str);
+}
+
+/*
+** Print all the -l detail
+*/
+
+void	print_l(t_dir *dir)
+{
 	int	i;
 	int	*tab;
 
 	i = 0;
 	tab = get_spaces(dir);
-	print_blocks(dir);
 	while (dir->names[i])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		stat(dir->file_path, &dir->stat);
+		lstat(dir->file_path, &dir->stat);
 		ft_putstr(mode(dir));
 		ft_putstr(repeat((tab[0] - ft_strlen(mode(dir))), ' '));
 		ft_putstr(ft_itoa((int)dir->stat.st_nlink));
@@ -156,7 +177,29 @@ void	opt_l(t_dir *dir)
 		ft_putstr(repeat(tab[4] - get_int_space((int)dir->stat.st_size), ' '));
 		ft_putstr(mtime(dir));
 		ft_putstr(" ");
-		ft_putendl(dir->names[i]);
+		ft_putendl(name(dir, i));
 		i++;
 	}
+}
+
+/*
+** -l Option	Give more detailled informations
+*/
+
+void	opt_l(t_dir *dir)
+{
+            ft_putendlcolor("opt_l();", MAGENTA);
+	int		i;
+	char	*c;
+
+	i = 0;
+	dir->file_path = get_file_path(dir->path, dir->names[i]);
+	if (check_path(dir->path) == 2) 
+		print_blocks(dir);
+	else
+	{
+		c = ft_strrchr(dir->path, '/');
+		*c = '\0';
+	}
+	print_l(dir);
 }

@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
@@ -38,7 +38,10 @@ void	init_dir(t_dir *dir, char *path)
     dir->path = ft_strdup(path);
 	len_dirent(dir);
 	dir->dir_tab = (char **)malloc(sizeof(char *) * (dir->len + 1));
-	get_dir_tab(dir);
+	if (check_path(dir->path) == 2)
+		get_dir_tab(dir);
+	else
+		dir->dir_tab = NULL;
 }
 
 /*

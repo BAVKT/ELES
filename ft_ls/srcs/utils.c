@@ -96,6 +96,35 @@ char	*get_file_path(char *path, char *name)
 }
 
 /*
+** If path is a file display it and return (1)
+*/
+
+int		display_file(t_dir *dir)
+{
+	int		ok;
+	char	*c;
+
+	dir->names = (char **)malloc(sizeof(char *) * 2);
+	ok = check_path(dir->path);
+	if (ok > 0 && ok != 2)
+	{
+		c = ft_strrchr(dir->path, '/');
+		if (c + 1 == '\0')
+			*c = '\0';
+		c = ft_strrchr(dir->path, '/');
+		dir->names[0] = ft_strdup(c + 1);
+		dir->names[1] = NULL;
+		//*c = '\0';
+		if (ft_strchr(g_b.options, 'l'))
+			opt_l(dir);
+		else
+			ft_putendl(dir->names[0]);
+		return (1);
+	}
+	return (0);
+}
+
+/*
 ** Display the final tab
 */
 
@@ -119,7 +148,7 @@ void	display(t_dir *dir)
 }
 
 /*
-** Display but with beautiful colors
+** Display but with incredibly beautiful colors
 */
 
 void	display_color(t_dir *dir)
