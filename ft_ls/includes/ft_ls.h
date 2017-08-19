@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 19:30:47 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/19 19:02:44 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void				print_blocks(t_dir *dir);
 void				get_dir_tab(t_dir *dir);
 int					display_file(t_dir *dir);
 void				print_l(t_dir *dir);
-void				presort_half_year(t_dir *dir);
-void				presort_month(t_dir *dir);
-void				presort_week(t_dir *dir);
+void				presort_time(t_dir *dir, int time);
 
 #endif
