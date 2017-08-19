@@ -25,7 +25,7 @@ char	**ft_init_tab(int size)
 	tab = (char **)malloc(sizeof(char *) * size + 1);
 	while (i < size)
 	{
-		tab[i] = (char *)malloc(sizeof(char) * size + 1);
+		tab[i] = ft_strnew(0);
 		i++;
 	}
 	tab[i] = NULL;

@@ -38,7 +38,7 @@ SRC = 	ft_isalpha.c 		ft_isprint.c 		ft_memcmp.c			\
 		ft_putendlcolor.c 	ft_strjoin_free.c 	ft_putcharendl.c 	\
 		get_next_line.c		ft_revstr.c 		ft_isupper.c 		\
 		no_case.c 			repeat.c 			tab_len.c			\
-		swap_tab.c 			free_tab.c								\
+		swap_tab.c 			free_tab.c			ft_init_tab.c		
 
 SRCO = $(SRC:%.c=%.o)
 

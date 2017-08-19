@@ -16,34 +16,9 @@ LS note maison
 
 RESTE A FAIRE :
 
-- Affichage liens symboliques
-- Tri du temps en -l
-	+ Affichage qui bug sur le temps parfois
-- Sticky bits
-- Specials chars
-- Gérer les @
+- regler probleme affichage espaces de la size
 - Probleme avec le -t sur ./ft_ls -lRat ~
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	reecrire le -t
 
 
 
@@ -184,8 +159,8 @@ Fonctions autorisées :
 
 
 rvievill [7:03 PM] 
-Dans le cas du -l les lien symbolique sont considéré comme des fichier du coup tu dois pas check le cible
-Genre ton lien pointe sur un répertoire ba si tu check la cible se sera un répertoire et non un lien alors qu'avec le -l faut que se sois un lien
+Dans le cas du -l les lien symbolique sont considéré comme des fichiers du coup tu dois pas check le cible
+Genre ton lien pointe sur un répertoire ba si tu check la cible se sera un répertoire et non un lien alors qu'avec le -l faut que ce soit un lien
 
 ----------------------------------------------------------------------------------------------------------------------------
 ############################################################################################################################
@@ -239,12 +214,12 @@ une socket ? (Pas dans POSIX.1-1996).
 Les attributs suivants correspondent au champ st_mode :
 S_IFMT	0170000	masque du type de fichier
 S_IFSOCK	0140000	socket
-S_IFLNK	0120000	lien symbolique
-S_IFREG	0100000	fichier ordinaire
-S_IFBLK	0060000	périphérique blocs
-S_IFDIR	0040000	répertoire
-S_IFCHR	0020000	périphérique caractères
-S_IFIFO	0010000	fifo
+S_IFLNK	0120000	lien symbolique = 'l'
+S_IFREG	0100000	fichier ordinaire = '-'
+S_IFBLK	0060000	périphérique blocs = 'b'
+S_IFDIR	0040000	répertoire = 'r'
+S_IFCHR	0020000	périphérique caractères = 'c'
+S_IFIFO	0010000	fifo = 'p'
 S_ISUID	0004000	bit set-UID
 S_ISGID	0002000	bit set-GID (voir plus loin)
 S_ISVTX	0001000	bit « sticky » (voir plus loin)

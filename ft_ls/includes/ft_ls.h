@@ -76,12 +76,15 @@ char				*owner(t_dir *dir);
 char				*gid(t_dir *dir);
 char				*mtime(t_dir *dir);
 int					*get_spaces(t_dir *dir);
-int					get_int_space(int nb);
+int					int_space(int nb);
 void				clean_base();
 void				clean_sdir(t_dir *dir);
 void				print_blocks(t_dir *dir);
 void				get_dir_tab(t_dir *dir);
 int					display_file(t_dir *dir);
 void				print_l(t_dir *dir);
+void				presort_half_year(t_dir *dir);
+void				presort_month(t_dir *dir);
+void				presort_week(t_dir *dir);
 
 #endif

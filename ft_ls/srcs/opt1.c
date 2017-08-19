@@ -98,13 +98,16 @@ void	opt_t(t_dir *dir)
 	int	time;
 
 	i = 0;
-	while (dir->names[i + 1])
+	presort_half_year(dir);
+	presort_month(dir);
+	presort_week(dir);
+	while (dir->names[i] && dir->names[i + 1])
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		stat(dir->file_path, &dir->stat);
+		lstat(dir->file_path, &dir->stat);
 		time = dir->stat.st_mtime;
 		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
-		stat(dir->file_path, &dir->stat);
+		lstat(dir->file_path, &dir->stat);
 		if (dir->stat.st_mtime > time)
 		{
 			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
@@ -115,6 +118,102 @@ void	opt_t(t_dir *dir)
 	}
 }
 
+/*
+** Make the -t option more powerfull. Cause at this moment, it's really shitty.
+*/
+
+void	presort_half_year(t_dir *dir)
+{
+            ft_putendlcolor("presort_half_year();", MAGENTA);
+	char	**old;
+	char	**tmp;
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	old = ft_init_tab(dir->len + 1);
+	tmp = ft_init_tab(dir->len + 1);
+	while(dir->names[i])
+	{
+		lstat(get_file_path(dir->path, dir->names[i]), &dir->stat);
+		if ((dir->stat.st_mtime - time(NULL)) > 15778800)
+			old[j++] = ft_strdup(dir->names[i++]);
+		else
+			tmp[k++] = ft_strdup(dir->names[i++]);
+	}
+	free_tab((void **)dir->names);
+	old[j] = NULL;
+	i = 0;
+	while (old[i])
+		tmp[k++] = ft_strdup(old[i++]);
+	tmp[k] = NULL;
+	dir->names = ft_cp_tab(dir->names, tmp);
+}
+
+void	presort_month(t_dir *dir)
+{
+            ft_putendlcolor("presort_month();", MAGENTA);
+	char	**old;
+	char	**tmp;
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	old = ft_init_tab(dir->len + 1);
+	tmp = ft_init_tab(dir->len + 1);
+	while(dir->names[i])
+	{
+		lstat(get_file_path(dir->path, dir->names[i]), &dir->stat);
+		if ((dir->stat.st_mtime - time(NULL)) > 2629800)
+			old[j++] = ft_strdup(dir->names[i++]);
+		else
+			tmp[k++] = ft_strdup(dir->names[i++]);
+	}
+	free_tab((void **)dir->names);
+	old[j] = NULL;
+	i = 0;
+	while (old[i])
+		tmp[k++] = ft_strdup(old[i++]);
+	dir->names = ft_cp_tab(dir->names, tmp);
+}
+
+
+void	presort_week(t_dir *dir)
+{
+            ft_putendlcolor("presort_week();", MAGENTA);
+	char	**old;
+	char	**tmp;
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	old = ft_init_tab(dir->len + 1);
+	tmp = ft_init_tab(dir->len + 1);
+	while(dir->names[i])
+	{
+		lstat(get_file_path(dir->path, dir->names[i]), &dir->stat);
+		if ((dir->stat.st_mtime - time(NULL)) > 657450)
+			old[j++] = ft_strdup(dir->names[i++]);
+		else
+			tmp[k++] = ft_strdup(dir->names[i++]);
+	}
+	free_tab((void **)dir->names);
+	old[j] = NULL;
+	i = 0;
+	while (old[i])
+		tmp[k++] = ft_strdup(old[i++]);
+	tmp[k] = NULL;
+	dir->names = ft_cp_tab(dir->names, tmp);
+}
 /*
 ** -r Option	Reverse the order
 */

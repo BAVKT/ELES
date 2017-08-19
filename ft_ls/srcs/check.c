@@ -23,12 +23,18 @@ int     check_path(char *path)
     struct stat st;
 
     lstat(path, &st);
-    if (S_ISDIR(st.st_mode))
+    if (S_ISREG(st.st_mode))
+        return (1);
+    else if (S_ISDIR(st.st_mode))
         return (2);
-    else if (S_ISREG(st.st_mode))
-        return (1);               
     else if (S_ISLNK(st.st_mode))
         return (3);
+    else if (st.st_mode & S_IFBLK)
+        return (4);
+    else if (st.st_mode & S_IFCHR)
+        return (5);
+    else if (st.st_mode & S_IFIFO)
+        return (6);
     error_path(path);
     return (0);
 }
