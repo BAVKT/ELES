@@ -6,75 +6,190 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 18:55:34 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:11:48 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/01 18:15:10 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+void	opt_t(t_dir *dir)
+{
+            ft_putendlcolor("opt_t();", MAGENTA);
+	int		i;
+	time_t	time;
+	t_s		*tmp;
+
+	i = 0;
+	dir->s = (t_s *)malloc(sizeof(t_s));
+	dir->s->next = NULL;
+	tmp = dir->s;
+	while (dir->names[i] && dir->names[i + 1])
+	{
+		store_stat(dir, tmp, dir->names[i]);
+		tmp = dir->s;
+		while (tmp->next && ft_strcmp(tmp->name, dir->names[i]))
+			tmp = tmp->next;
+		time = tmp->mtime;
+		tmp = dir->s;
+		while (tmp->next && ft_strcmp(tmp->name, dir->names[i + 1]))
+			tmp = tmp->next;
+		if (tmp->mtime > time)
+		{
+			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
+			i = -1;
+		}
+		i++;
+	}
+}
+
+void	store_stat(t_dir *dir, t_s *tmp, char *name)
+{
+		ft_putendlcolor("store_stat();", MAGENTA);
+	get_stat(dir, name, 0);
+	tmp->name = ft_strdup(name);
+	tmp->dev = dir->stat.st_dev;
+	tmp->ino = dir->stat.st_ino;
+	tmp->mode = dir->stat.st_mode;
+	tmp->nlink = dir->stat.st_nlink;
+	tmp->uid = dir->stat.st_uid;
+	tmp->gid = dir->stat.st_gid;
+	tmp->rdev = dir->stat.st_rdev;
+	tmp->size = dir->stat.st_size;
+	tmp->blksize = dir->stat.st_blksize;
+	tmp->blocks = dir->stat.st_blocks;
+	tmp->atime = dir->stat.st_atime;
+	tmp->mtime = dir->stat.st_mtime;
+	tmp->ctime = dir->stat.st_ctime;
+	if (!(tmp->next = (t_s *)malloc(sizeof(t_s))))
+		perror("Malloc failed");
+	tmp = tmp->next;
+	tmp->next = NULL;
+}
+
 /*
 ** -t Option	Sort by time
 */
 
-void	opt_t(t_dir *dir)
-{
-            ft_putendlcolor("opt_t();", MAGENTA);
-	int	i;
-	int	time;
+// void	opt_t(t_dir *dir)
+// {
+//             ft_putendlcolor("opt_t();", MAGENTA);
+// 	int		i;
+// 	time_t	time;	
+// 	t_s		*tmp;
 
-	i = 0;
-	presort_time(dir, 15778800);
-	presort_time(dir, 2629800);
-	presort_time(dir, 657450);
-	presort_time(dir, 93922);
-	while (dir->names[i] && dir->names[i + 1])
-	{
-		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		lstat(dir->file_path, &dir->stat);
-		time = dir->stat.st_mtime;
-		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
-		lstat(dir->file_path, &dir->stat);
-		if (dir->stat.st_mtime > time)
-		{
-			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
-			i = 0;
-		}
-		else
-			i++;
-	}
-}
+// 	i = 0;
+// 	dir->s = (t_s *)malloc(sizeof(t_s));
+// 	tmp = dir->s;
+// 	store_stat(dir);
+// 	while (dir->names[i] && dir->names[i + 1])
+// 	{
+// 		tmp = dir->s;
+// 		while (tmp->next && ft_strcmp(tmp->name, dir->names[i]))
+// 			tmp = tmp->next;
+// 		time = tmp->mtime;
+// 		tmp = dir->s;
+// 		while (tmp->next && ft_strcmp(tmp->name, dir->names[i + 1]))
+// 			tmp = tmp->next;
+// 		if (tmp->mtime > time)
+// 		{
+// 			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
+// 			i = -1;
+// 		}
+// 		i++;
+// 	}
+// }
 
+// ##################V2##################
+
+// void	opt_t(t_dir *dir)
+// {
+//             ft_putendlcolor("opt_t();", MAGENTA);
+// 	int		i;
+// 	time_t	time;
+// 	t_s		*tmp;
+// 	t_s		*actual;
+
+// 	i = 0;
+// 	dir->s = (t_s *)malloc(sizeof(t_s));
+// 	dir->s->next = NULL;
+// 	tmp = dir->s;
+// 	while (dir->names[i] && dir->names[i + 1])
+// 	{
+// 		store_stat(dir, tmp, dir->names[i]);
+// 		tmp = dir->s;
+// 		while (tmp->next && ft_strcmp(tmp->name, dir->names[i]))
+// 			tmp = tmp->next;
+// 		time = tmp->mtime;
+// 		tmp = dir->s;
+// 		while (tmp->next && ft_strcmp(tmp->name, dir->names[i + 1]))
+// 			tmp = tmp->next;
+// 		if (tmp->mtime > time)
+// 		{
+// 			swap_tab((void **)&dir->names[i], (void **)&dir->names[i + 1]);
+// 			i = -1;
+// 		}
+// 		i++;
+// 	}
+// }
+
+// void	store_stat(t_dir *dir, t_s *tmp, char *name)
+// {
+// 	ft_putendlcolor("store_stat();", MAGENTA);
+// 	while ()
+// 	get_stat(dir, name, 0);
+// 	tmp->name = ft_strdup(name);
+// 	tmp->dev = dir->stat.st_dev;
+// 	tmp->ino = dir->stat.st_ino;
+// 	tmp->mode = dir->stat.st_mode;
+// 	tmp->nlink = dir->stat.st_nlink;
+// 	tmp->uid = dir->stat.st_uid;
+// 	tmp->gid = dir->stat.st_gid;
+// 	tmp->rdev = dir->stat.st_rdev;
+// 	tmp->size = dir->stat.st_size;
+// 	tmp->blksize = dir->stat.st_blksize;
+// 	tmp->blocks = dir->stat.st_blocks;
+// 	tmp->atime = dir->stat.st_atime;
+// 	tmp->mtime = dir->stat.st_mtime;
+// 	tmp->ctime = dir->stat.st_ctime;
+// 	if (!(tmp->next = (t_s *)malloc(sizeof(t_s))))
+// 		perror("Malloc failed");
+// 	tmp = tmp->next;
+// 	tmp->next = NULL;
+// }
+// ###################V2###############
 /*
-** Make the -t option more powerfull. Cause at this moment, it's really shitty.
+** Store all the lists
 */
 
-void	presort_time(t_dir *dir, int ti)
-{
-            ft_putendlcolor("presort_time();", MAGENTA);
-	char	**old;
-	char	**tmp;
-	int		i;
-	int		j;
-	int		k;
+// void	store_stat(t_dir *dir)
+// {
+//             ft_putendlcolor("store_stat();", MAGENTA);
+// 	int	i;
+// 	t_s *tmp;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	old = ft_init_tab(tab_len(dir->names) + 1);
-	tmp = ft_init_tab(tab_len(dir->names) + 1);
-	while(dir->names[i])
-	{
-		lstat(get_file_path(dir->path, dir->names[i]), &dir->stat);
-		if ((time(NULL) - dir->stat.st_mtime > ti))
-			old[j++] = ft_strdup(dir->names[i++]);
-		else
-			tmp[k++] = ft_strdup(dir->names[i++]);
-	}
-	free_tab((void **)dir->names);
-	old[j] = NULL;
-	i = 0;
-	while (old[i] && tmp[k])
-		tmp[k++] = ft_strdup(old[i++]);
-	tmp[k] = NULL;
-	dir->names = ft_cp_tab(dir->names, tmp);
-}
+// 	i = -1;
+// 	tmp = dir->s;
+// 	dir->s->next = NULL;
+// 	while (dir->names[++i])
+// 	{
+// 		get_stat(dir, dir->names[i], 0);
+// 		tmp->name = ft_strdup(dir->names[i]);
+// 		tmp->dev = dir->stat.st_dev;
+// 		tmp->ino = dir->stat.st_ino;
+// 		tmp->mode = dir->stat.st_mode;
+// 		tmp->nlink = dir->stat.st_nlink;
+// 		tmp->uid = dir->stat.st_uid;
+// 		tmp->gid = dir->stat.st_gid;
+// 		tmp->rdev = dir->stat.st_rdev;
+// 		tmp->size = dir->stat.st_size;
+// 		tmp->blksize = dir->stat.st_blksize;
+// 		tmp->blocks = dir->stat.st_blocks;
+// 		tmp->atime = dir->stat.st_atime;
+// 		tmp->mtime = dir->stat.st_mtime;
+// 		tmp->ctime = dir->stat.st_ctime;
+// 		if (!(tmp->next = (t_s *)malloc(sizeof(t_s))))
+// 			perror("Malloc failed");
+// 		tmp = tmp->next;
+// 		tmp->next = NULL;
+// 	}
+// }

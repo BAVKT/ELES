@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:01:51 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/01 19:19:02 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,29 @@ int		len_dirent(t_dir *dir)
 */
 
 int		int_space(int nb)
-{			
+{
 	return (ft_strlen(ft_itoa(nb)));
 }
 
 /*
-** Return a tab with the good number of spaces for eache
+** Init stat
+*/
+
+int		get_stat(t_dir *dir, char *name, int i)
+{
+	dir->file_path = get_file_path(dir->path, name);
+	if (lstat(dir->file_path, &dir->stat) == -1)
+	{
+		if (i)
+			perror("");
+		return (0);
+	}
+	return (1);
+}
+
+
+/*
+** Return a tab with the good number of spaces for each
 */
 
 int		*get_spaces(t_dir *dir)
@@ -49,22 +66,24 @@ int		*get_spaces(t_dir *dir)
 	int nb;
 
 	i = 0;
-	tab = (int *)malloc(sizeof(int) * 8);
+	if (!(tab = (int *)malloc(sizeof(int) * 8)))
+		perror("MALLOC FAILED");
 	while (i < 8)
 		tab[i++] = 0;
 	i = 0;
-	while (dir->names[i])
+	while (dir->names[i] && ft_strcmp(dir->names[i], ".") && ft_strcmp(dir->names[i], ".."))
 	{
-		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		stat(dir->file_path, &dir->stat);
-		tab[0] = ((nb = ft_strlen(mode(dir))) > tab[0]) ? nb : tab[0];
-		tab[1] = ((nb = int_space(dir->stat.st_nlink)) > tab[1]) ? nb : tab[1];
-		tab[2] = ((nb = ft_strlen(owner(dir))) > tab[2]) ? nb : tab[2];
-		tab[3] = ((nb = ft_strlen(gid(dir))) > tab[3]) ? nb : tab[3];
-		tab[4] = ((nb = int_space(dir->stat.st_size)) > tab[4]) ? nb : tab[4];
-		tab[5] = ((nb = ft_strlen(mtime(dir))) > tab[5]) ? nb : tab[5];
-		tab[6] = ((nb = int_space(major(dir->stat.st_rdev)))) > tab[6] ? nb : tab[6];
-		tab[7] = ((nb = int_space(minor(dir->stat.st_rdev)))) > tab[7] ? nb : tab[7];
+		if (get_stat(dir, dir->names[i], 0))
+		{
+			tab[0] = ((nb = ft_strlen(mode(dir))) > tab[0]) ? nb : tab[0];
+			tab[1] = ((nb = int_space(dir->stat.st_nlink)) > tab[1]) ? nb : tab[1];
+			tab[2] = ((nb = ft_strlen(owner(dir))) > tab[2]) ? nb : tab[2];
+			tab[3] = ((nb = ft_strlen(gid(dir))) > tab[3]) ? nb : tab[3];
+			tab[4] = ((nb = int_space(dir->stat.st_size)) > tab[4]) ? nb : tab[4];
+			tab[5] = ((nb = ft_strlen(mtime(dir))) > tab[5]) ? nb : tab[5];
+			tab[6] = ((nb = int_space(major(dir->stat.st_rdev)))) > tab[6] ? nb : tab[6];
+			tab[7] = ((nb = int_space(minor(dir->stat.st_rdev)))) > tab[7] ? nb : tab[7];
+		}
 		i++;
 	}
 	return (tab);

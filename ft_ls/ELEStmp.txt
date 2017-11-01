@@ -16,14 +16,16 @@ LS note maison
 
 RESTE A FAIRE :
 
-- regler probleme affichage espaces de la size
+- Segfault 1 fosi sur 5 avec ./ft_ls -rlaR ~ 
+- Le -R marche pas sur le /dev
+- regler probleme affichage espaces de la size 
 - Probleme avec le -t sur ./ft_ls -lRat ~
 	reecrire le -t
-
-
-
-
-
+	Enregistrer le time dans la struct pour pas faire 250M d'appels a lstat
+- Manque l'instantiation de nb dans get_spaces() ?
+- Probleme affichage liens symboliques
+- Il y a pas de couleur sur le -l
+- Mauvais espacement avant la size avec -l
 
 Ordre des options :
 
@@ -45,7 +47,7 @@ Base :
 - Faire un Makefile
 - Fichier Auteur
 
-- Réaliser les options -l, -R, -a, -r et -t et -1 .
+- Réaliser les options -l, -R, -a, -r, -t et -1 .
 	- Commencer par -R
 	-a = qui commence par un '.'
 	-l = list in long format

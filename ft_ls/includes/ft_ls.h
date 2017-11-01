@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:02:44 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/01 18:15:00 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_dir
 	struct stat		stat;		//La struct stat
 	struct passwd	pwd;		//Struct password
 	struct group	gr;			//Struct group
+	struct s_s		*s;
 	int				len;		//Nombre de fichiers/dossiers
 	char 			*path;		//Le path actuel
 	char			*file_path;	//Le path du file
@@ -46,6 +47,25 @@ typedef struct		s_base
 	char			*options;	//Les options passées
 }					t_base;
 t_base				g_b;
+
+typedef struct		s_s
+{
+	char			*name;
+	dev_t			dev;
+ 	ino_t			ino;
+ 	mode_t			mode;
+ 	nlink_t			nlink;
+ 	uid_t			uid;
+ 	gid_t			gid;
+ 	dev_t			rdev;
+ 	off_t			size;
+ 	blksize_t 		blksize;
+ 	blkcnt_t  		blocks;
+ 	time_t    		atime;
+ 	time_t    		mtime;
+ 	time_t    		ctime;
+ 	struct s_s		*next;
+}					t_s;
 
 int					main();
 void				ls(char *path);
@@ -84,5 +104,7 @@ void				get_dir_tab(t_dir *dir);
 int					display_file(t_dir *dir);
 void				print_l(t_dir *dir);
 void				presort_time(t_dir *dir, int time);
+int					get_stat(t_dir *dir, char *name, int i);
+void				store_stat(t_dir *dir, t_s *tmp, char *name);
 
 #endif

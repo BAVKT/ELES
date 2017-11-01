@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:01:52 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/08/26 19:05:02 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*opt_tab(char **av)
 }
 
 /*
-** -a Option	Show hidden files
+** -a Option	Show hidden files & dirs
 */
 
 void	opt_a(t_dir *dir)
@@ -128,6 +128,7 @@ void	opt_R(t_dir *dir)
 	int i;
 
     i = 0;
+    ft_putendl("yo");
     dir->names = ft_cp_tab(dir->names, dir->dir_tab);
 	!ft_strchr(g_b.options, 't') ? i = 0 : opt_t(dir);
     !ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);

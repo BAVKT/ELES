@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:08:37 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/01 19:23:08 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*gid(t_dir *dir)
 
 char	*mtime(t_dir *dir)
 {
+            // ft_putendlcolor("mtime();", MAGENTA);	
 	time_t	now;
 	time_t	ti;
 	char	*str;
@@ -51,10 +52,11 @@ char	*mtime(t_dir *dir)
 	str = ft_strnew(0);
 	ti = now - ti;
 	if (ti > 15778800 || ti < 0)
-		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 15);
+		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 14);
 	else
 		tmp2 = ft_strncpy(tmp2, &(tmp[4]), 12);
-	return (str = ft_strjoin_free(str, tmp2));
+	str = ft_strjoin_free(str, tmp2);
+	return (str);
 }
 
 /*
@@ -121,8 +123,7 @@ void	print_blocks(t_dir *dir)
 	nb = 0;
 	while (dir->names[i])
 	{
-		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		lstat(dir->file_path, &dir->stat);
+		get_stat(dir, dir->names[i], 0);
 		nb += dir->stat.st_blocks;
 		i++;
 	}
@@ -197,22 +198,24 @@ void	print_l(t_dir *dir)
 	tab = get_spaces(dir);
 	while (dir->names[i])
 	{
-		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		lstat(dir->file_path, &dir->stat);
-		ft_putstr(mode(dir));
-		ft_putstr(repeat((tab[0] - ft_strlen(mode(dir))), ' '));
-		ft_putstr(ft_itoa((int)dir->stat.st_nlink));
-		ft_putstr(repeat(tab[1] - int_space((int)dir->stat.st_nlink), ' '));
-		ft_putstr(owner(dir));
-		ft_putstr(repeat(tab[2] - ft_strlen(owner(dir)), ' '));
-		ft_putstr(gid(dir));
-		ft_putstr(repeat(tab[3] - ft_strlen(gid(dir)), ' '));
-		ft_putstr(size(dir, i, tab));
-		ft_putstr(mtime(dir));
-		ft_putstr(" ");
-		ft_putendl(name(dir, i));
+		if (get_stat(dir, dir->names[i], 0))
+		{
+			ft_putstr(mode(dir));
+			ft_putstr(repeat((tab[0] - ft_strlen(mode(dir))), ' '));
+			ft_putstr(ft_itoa((int)dir->stat.st_nlink));
+			ft_putstr(repeat(tab[1] - int_space((int)dir->stat.st_nlink), ' '));
+			ft_putstr(owner(dir));
+			ft_putstr(repeat(tab[2] - ft_strlen(owner(dir)), ' '));
+			ft_putstr(gid(dir));
+			ft_putstr(repeat(tab[3] - ft_strlen(gid(dir)), ' '));
+			ft_putstr(size(dir, i, tab));
+			ft_putstr(mtime(dir));
+			ft_putstr(" ");
+			ft_putendl(name(dir, i));
+		}
 		i++;
 	}
+			ft_putendl("end print_l");
 }
 
 /*
@@ -226,9 +229,12 @@ void	opt_l(t_dir *dir)
 	char	*c;
 
 	i = 0;
-	dir->file_path = get_file_path(dir->path, dir->names[i]);
-	if (check_path(dir->path) == 2) 
+//	dir->file_path = get_file_path(dir->path, dir->names[i]);
+	i = check_path(dir->path);
+	if (i == 2) 
 		print_blocks(dir);
+	else if (i == 0)
+		return ;
 	else
 	{
 		c = ft_strrchr(dir->path, '/');

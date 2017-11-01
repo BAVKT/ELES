@@ -6,14 +6,14 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:02:53 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:00:19 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Lance le LS, appelle les options necessaire et est le recursif
+** Start LS and the options
 */
 
 void	ls(char *path)

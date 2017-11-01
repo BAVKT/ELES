@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:43:29 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/19 19:01:51 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:10:52 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void	get_dir_tab(t_dir *dir)
 	}
 	while ((dir->dirent = readdir(dir->rep)))
 	{
-		dir->file_path = get_file_path(dir->path, dir->dirent->d_name);
-		lstat(dir->file_path, &dir->stat);
+		get_stat(dir, dir->dirent->d_name, 0);
 		if (check_path(dir->file_path) == 2)
 		{
 			if (ft_strchr(g_b.options, 'a') && !check_point(dir->dirent->d_name))
