@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:43:29 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/10/31 18:10:52 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 18:05:59 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,29 @@
 void	init_base(char **av)
 {
             ft_putendlcolor("init_base();", MAGENTA);
+	int		i;
+	int		ok;
+
 	g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av));
-	g_b.paths[0] = ft_strdup(".");
-	g_b.paths[1] = NULL;
+	i = 1;
+	ok = 0;
+	while (av[i])
+	{
+		if (av[i][0] == '-')
+			;
+		else if (!check_path(av[i]))
+		{
+			ok = 1;
+			g_b.paths[0] = NULL;
+			break ;
+		}
+		i++;
+	}
+	if (ok == 0)
+	{
+		g_b.paths[0] = ft_strdup(".");
+		g_b.paths[1] = NULL;
+	}
 	set_paths(av);
 	g_b.options = opt_tab(av);
 	g_b.nbpaths = tab_len(g_b.paths);
@@ -35,6 +55,11 @@ void	init_base(char **av)
 void	init_dir(t_dir *dir, char *path)
 {
             ft_putendlcolor("init_dir();", MAGENTA);
+
+    if (!path)
+    	return ;
+    		ft_putendl(path);
+    		ft_putendl("yo");
     dir->path = ft_strdup(path);
 	len_dirent(dir);
 	dir->dir_tab = (char **)malloc(sizeof(char *) * (dir->len + 1));
@@ -119,12 +144,16 @@ void	set_paths(char **av)
 			i++;
 		else
 		{
+			// if (av[i] && av[i][0] == '-' && g_b.ac > 2)
+			// 	g_b.paths[0] = NULL;
 			if (!check_path(av[i]))
+			{
+				error_path(av[i]);
 				i++;
+			}
 			else
 				g_b.paths[j++] = ft_strdup(av[i++]);
 		}
 	}
 	g_b.paths[j + 1] = NULL;
 }
-

@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/01 19:19:02 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 18:08:25 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		*get_spaces(t_dir *dir)
 	while (i < 8)
 		tab[i++] = 0;
 	i = 0;
-	while (dir->names[i] && ft_strcmp(dir->names[i], ".") && ft_strcmp(dir->names[i], ".."))
+	while (dir->names[i])
 	{
 		if (get_stat(dir, dir->names[i], 0))
 		{
@@ -113,6 +113,7 @@ char	*get_file_path(char *path, char *name)
 
 int		display_file(t_dir *dir)
 {
+            ft_putendlcolor("display_file()", MAGENTA);
 	int		ok;
 	char	*c;
 

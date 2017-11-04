@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/01 19:23:08 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 16:44:27 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ void	opt_l(t_dir *dir)
 	i = 0;
 //	dir->file_path = get_file_path(dir->path, dir->names[i]);
 	i = check_path(dir->path);
-	if (i == 2) 
+	if (i == 2 || i == 4) 
 		print_blocks(dir);
 	else if (i == 0)
 		return ;

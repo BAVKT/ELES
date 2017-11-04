@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 03:27:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/26 18:42:02 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 17:35:23 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int     check_path(char *path)
         return (5);
     else if (st.st_mode & S_IFIFO)
         return (6);
-    error_path(path);
     return (0);
 }
 

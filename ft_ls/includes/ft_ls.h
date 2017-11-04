@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/01 18:15:00 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 17:02:18 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_dir
 
 typedef struct		s_base
 {
+	int				ac;
 	int				nbpaths;	//le nombre de paths donnés
 	char			**paths;	//Les paths passés en arg
 	char			*options;	//Les options passées

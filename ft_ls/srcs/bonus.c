@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:31:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 19:38:13 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 15:32:37 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	opt_u(t_dir *dir)
 			i++;
 	}
 }
-
 
 /*
 ** Output is not sorted.  This option turns on the -a option

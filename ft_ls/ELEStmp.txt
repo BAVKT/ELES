@@ -16,16 +16,16 @@ LS note maison
 
 RESTE A FAIRE :
 
-- Segfault 1 fosi sur 5 avec ./ft_ls -rlaR ~ 
+- Il affiche des trucs meme si l'arg passé existe pas
 - Le -R marche pas sur le /dev
 - regler probleme affichage espaces de la size 
 - Probleme avec le -t sur ./ft_ls -lRat ~
-	reecrire le -t
-	Enregistrer le time dans la struct pour pas faire 250M d'appels a lstat
 - Manque l'instantiation de nb dans get_spaces() ?
 - Probleme affichage liens symboliques
 - Il y a pas de couleur sur le -l
 - Mauvais espacement avant la size avec -l
+
+
 
 Ordre des options :
 
@@ -62,7 +62,7 @@ Base :
 		- Si le fichier a plus de 6 mois, on affiche son annee au lieu de l'heure/min.
 		- Si l'user ou le groupe ne sont pas connus, on affiche son ID en chiffre.
 		- Truc avec les liens symboliques, pas trop compris.
-		- LEs mineurs majeurs (compliqué apparemment ls -l \dev)
+		- Les mineurs majeurs (compliqué apparemment ls -l \dev)
 	-R = recursive list subdirectories
 	-r = reverse the order of the sort
 	-t = sort par date de modification (+recent en 1er)

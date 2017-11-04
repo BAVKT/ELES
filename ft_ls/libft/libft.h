@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 13:46:11 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/10/25 17:14:06 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/09/02 18:57:20 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ char				**ft_init_tab(int size);
 char				**ft_cp_tab(char **tab, char **dst);
 int					tab_len(char **tab);
 void				free_tab(void **tab);
-void				freentab(void **tab, int n);
 void				ft_print_tab(char **str);
 
 /*
