@@ -16,11 +16,11 @@ LS note maison
 
 RESTE A FAIRE :
 
-- Il affiche des trucs meme si l'arg passé existe pas
-- Le -R marche pas sur le /dev
-- regler probleme affichage espaces de la size 
-- Probleme avec le -t sur ./ft_ls -lRat ~
-- Manque l'instantiation de nb dans get_spaces() ?
+- Couille si on met l'argument avant les options
+	./ft_ls testdir -Rla
+- Le -R marche pas sur le /dev 
+	+ l'affichage qui marche avec -l mais pas en normal
+		- Manque l'instantiation de nb dans get_spaces() ?
 - Probleme affichage liens symboliques
 - Il y a pas de couleur sur le -l
 - Mauvais espacement avant la size avec -l

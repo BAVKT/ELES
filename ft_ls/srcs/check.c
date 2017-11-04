@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 03:27:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 17:35:23 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:11:15 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,26 @@
 
 int     check_path(char *path)
 {
-            //ft_putendlcolor("check_path();", MAGENTA);
+               //ft_putendlcolor("check_path();", MAGENTA);
     struct stat st;
+    int     r;
 
+    r = 0;
     if (lstat(path, &st) == -1)
-        return (0);
+        r = 0;
     if (S_ISREG(st.st_mode))
-        return (1);
+        r = 1;
     else if (S_ISDIR(st.st_mode))
-        return (2);
+        r = 2;
     else if (S_ISLNK(st.st_mode))
-        return (3);
+        r = 3;
     else if (st.st_mode & S_IFBLK)
-        return (4);
+        r = 4;
     else if (st.st_mode & S_IFCHR)
-        return (5);
+        r = 5;
     else if (st.st_mode & S_IFIFO)
-        return (6);
-    return (0);
+        r = 6;
+    return (r);
 }
 
 /*

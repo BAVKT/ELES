@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 20:04:49 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:11:14 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,11 @@ int		main(int ac, char **av)
 
 	i = 0;
     g_b.ac = ac;
+    g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av));
     init_base(av);
-	j = tab_len(g_b.paths);
+    j = tab_len(g_b.paths);
 	while (i < j && g_b.paths[i])
-    {
-        ft_putendl("XBLI");
-        ft_putnbrendl(i);   
-        if (g_b.paths[i])
-        {
-            ft_putendl("111111");
-            ft_putendl(g_b.paths[i]);
-        }
-        else 
-            ft_putendl("222222");
-        ft_putendl("yolo");
-        ft_putnbrendl(ft_strlen(g_b.paths[i]));
-		ls(g_b.paths[i]);
-        i++;
-    }
+		ls(g_b.paths[i++]);
  //   clean_base();
 	return (0);
 }

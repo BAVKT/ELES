@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 15:48:55 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:11:18 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,20 @@ void	opt_a(t_dir *dir)
             ft_putendlcolor("opt_a();", MAGENTA);
 	int	i;
 
+	if (!(dir->names = (char **)malloc(sizeof(char *) * (dir->len + 1))))
+		perror("MALLOC FAILED");
 	i = 0;
-    dir->names = (char **)malloc(sizeof(char *) * (dir->len + 1));
+    while (i < dir->len + 1)
+    	dir->names[i++] = NULL;
+	i = 0;
 	dir->rep = opendir(dir->path);
 	while ((dir->dirent = readdir(dir->rep)))
 		dir->names[i++] = ft_strdup(dir->dirent->d_name);
 	dir->names[i] = NULL;
 	closedir(dir->rep);
-    dir->display = (char **)malloc(sizeof(char *) * dir->len + 1);
-    dir->display = ft_cp_tab(dir->display, dir->names);
+	if (!(dir->display = (char **)malloc(sizeof(char *) * dir->len + 1)))
+		perror("MALLOC FAILED");
+	dir->display = ft_cp_tab(dir->display, dir->names);
 }
 
 /*
@@ -128,12 +133,14 @@ void	opt_R(t_dir *dir)
 	int i;
 
     i = 0;
-    ft_putendl("yo");
     dir->names = ft_cp_tab(dir->names, dir->dir_tab);
 	!ft_strchr(g_b.options, 't') ? i = 0 : opt_t(dir);
     !ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);
     dir->dir_tab = ft_cp_tab(dir->dir_tab, dir->names);
-    		ft_putendl(get_file_path(dir->path, dir->dir_tab[i]));
-    while (dir->dir_tab[i])
+    		// ft_putendl(get_file_path(dir->path, dir->dir_tab[i]));
+    		ft_putendl("yo");
+    while (dir->dir_tab && dir->dir_tab[i])
+    {
     	ls(get_file_path(dir->path, dir->dir_tab[i++]));
+    }
 }

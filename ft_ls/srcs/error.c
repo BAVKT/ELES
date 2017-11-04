@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 05:31:42 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 17:31:44 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:11:14 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		error(char *name, int e)
 		ft_putendl("Bad file descriptor");
 	else if (e == 2)
 		ft_putendl("Permission denied");
+	else if (e == 3)
+		ft_putendl("directory causes a cycle");
 	return(0);
 }
 

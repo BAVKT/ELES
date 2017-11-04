@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:43:29 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 18:05:59 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:11:16 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@ void	init_base(char **av)
 	int		i;
 	int		ok;
 
-	g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av));
+	i = 0;
+	while (i < tab_len(av))
+		g_b.paths[i++] = NULL;
 	i = 1;
 	ok = 0;
 	while (av[i])
 	{
-		if (av[i][0] == '-')
-			;
-		else if (!check_path(av[i]))
+		if (!check_path(av[i++]))
 		{
 			ok = 1;
 			g_b.paths[0] = NULL;
 			break ;
 		}
-		i++;
 	}
 	if (ok == 0)
 	{
@@ -55,14 +54,17 @@ void	init_base(char **av)
 void	init_dir(t_dir *dir, char *path)
 {
             ft_putendlcolor("init_dir();", MAGENTA);
+	int i;
 
     if (!path)
     	return ;
-    		ft_putendl(path);
-    		ft_putendl("yo");
     dir->path = ft_strdup(path);
 	len_dirent(dir);
-	dir->dir_tab = (char **)malloc(sizeof(char *) * (dir->len + 1));
+	if (!(dir->dir_tab = (char **)malloc(sizeof(char *) * (dir->len + 1))))
+		perror("MALLOC FAILED");
+	i = 0;
+	while (i < dir->len + 1)
+		dir->dir_tab[i++] = NULL;
 	if (check_path(dir->path) == 2)
 		get_dir_tab(dir);
 	else

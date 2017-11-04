@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 18:08:25 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:11:16 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ void	display_color(t_dir *dir)
 		tmp = ft_strdup(dir->path);
 		tmp[ft_strlen(dir->path)] = ':';
 		dir->path[ft_strlen(dir->path)] = '\0';
-		ft_putendl(tmp);
 	}
 	while (i < j)
 	{
