@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:11:14 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/04 22:24:18 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ls(char *path)
             ft_putendlcolor("ls();", MAGENTA);
     t_dir	dir;
     int		i;
-    
+
     init_dir(&dir, path);
     if (display_file(&dir))
         return ;
@@ -35,7 +35,7 @@ void	ls(char *path)
         if (ft_strchr(g_b.options, 'l'))
         	opt_l(&dir);
         else
-        {	
+        {
         	ft_cp_tab(dir.display, dir.names);
         	display_color(&dir);
         }

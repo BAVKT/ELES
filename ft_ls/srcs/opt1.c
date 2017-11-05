@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:11:18 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 15:00:19 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,6 @@ void	opt_R(t_dir *dir)
 	!ft_strchr(g_b.options, 't') ? i = 0 : opt_t(dir);
     !ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);
     dir->dir_tab = ft_cp_tab(dir->dir_tab, dir->names);
-    		// ft_putendl(get_file_path(dir->path, dir->dir_tab[i]));
-    		ft_putendl("yo");
     while (dir->dir_tab && dir->dir_tab[i])
     {
     	ls(get_file_path(dir->path, dir->dir_tab[i++]));

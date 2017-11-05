@@ -6,14 +6,14 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:11:16 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 15:41:23 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Return the amount of elements in the dir 
+** Return the amount of elements in the dir
 */
 
 int		len_dirent(t_dir *dir)
@@ -156,6 +156,7 @@ void	display(t_dir *dir)
 		tmp[ft_strlen(dir->path) - 1] = ':';
 		ft_putendl(tmp);
 	}
+
 	while (i < j)
 		ft_putendl(dir->display[i++]);
 }
