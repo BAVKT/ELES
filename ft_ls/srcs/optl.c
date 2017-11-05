@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 17:02:56 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:06:01 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,22 @@ char	*gid(t_dir *dir)
 char	*mtime(t_dir *dir)
 {
             // ft_putendlcolor("mtime();", MAGENTA);
-	time_t	now;
 	time_t	ti;
 	char	*str;
 	char	*tmp;
 	char	*tmp2;
 	char	*tmp3;
 
-	now = time(NULL);
 	ti = dir->stat.st_mtime;
 	tmp = ctime(&ti);
 	tmp2 = ft_strnew(0);
 	tmp3 = ft_strnew(0);
 	str = ft_strnew(0);
-	ti = now - ti;
+	ti = time(NULL) - ti;
 	if (ti > 15778800 || ti < 0)
 	{
-		str = ft_strncpy(str, &(tmp[4]), 7);
+		str = ft_strncpy(str, &(tmp[4]), 6);
+		str = ft_strjoin(str, " ");
 		tmp3 = ft_strncpy(tmp3, &(tmp[20]), 4);
 		tmp2 = ft_strjoin(str, tmp3);
 		tmp2 = ft_strjoin(tmp2, " ");
