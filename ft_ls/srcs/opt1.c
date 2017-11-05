@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 15:00:19 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:27:00 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,24 @@ char	*opt_tab(char **av)
 	int	j;
 	int	k;
 
-	i = 1;
+	i = 0;
 	k = 0;
 	g_b.options = ft_strnew(7);
-	while (av[i] && av[i][0] == '-')
+	while (av[++i])
 	{
-		j = 1;
-		while (av[i][j])
+		if (av[i][0] == '-')
 		{
-			if (av[i][j] != 'a' && av[i][j] != 'l' && av[i][j] != 'R' && 
-				av[i][j] != 'r' && av[i][j] != 't' && av[i][j] != '1' &&
-				av[i][j] != 'u')
-				usage();
-			else if (av[i][j])
-				g_b.options[k++] = av[i][j++];
+			j = 1;
+			while (av[i][j])
+			{
+				if (av[i][j] != 'a' && av[i][j] != 'l' && av[i][j] != 'R' &&
+					av[i][j] != 'r' && av[i][j] != 't' && av[i][j] != '1' &&
+					av[i][j] != 'u')
+					usage();
+				else if (av[i][j])
+					g_b.options[k++] = av[i][j++];
+			}
 		}
-			i++;
 	}
 	return (g_b.options);
 }
@@ -106,7 +108,7 @@ void	opt_r(t_dir *dir)
 	i = 0;
 	x = tab_len(dir->names);
 	rev = (char **)malloc(sizeof(char *) * (x + 1));
-	x -= 1 ; 
+	x -= 1 ;
 	while (dir->names[i])
 	{
 		rev[i] = ft_strdup(dir->names[x - i]);
@@ -132,13 +134,11 @@ void	opt_R(t_dir *dir)
             ft_putendlcolor("opt_R();", MAGENTA);
 	int i;
 
-    i = 0;
-    dir->names = ft_cp_tab(dir->names, dir->dir_tab);
+	i = 0;
+	dir->names = ft_cp_tab(dir->names, dir->dir_tab);
 	!ft_strchr(g_b.options, 't') ? i = 0 : opt_t(dir);
-    !ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);
-    dir->dir_tab = ft_cp_tab(dir->dir_tab, dir->names);
-    while (dir->dir_tab && dir->dir_tab[i])
-    {
-    	ls(get_file_path(dir->path, dir->dir_tab[i++]));
-    }
+	!ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);
+	dir->dir_tab = ft_cp_tab(dir->dir_tab, dir->names);
+	while (dir->dir_tab && dir->dir_tab[i])
+		ls(get_file_path(dir->path, dir->dir_tab[i++]));
 }

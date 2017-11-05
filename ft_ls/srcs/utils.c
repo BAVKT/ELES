@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 15:41:23 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:42:16 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*get_file_path(char *path, char *name)
 {
             //ft_putendlcolor("get_file_path();", MAGENTA);
 	char	*tmp;
-		
+
 	if (!ft_strcmp(path, "."))
 		return(name);
 	tmp = ft_strdup(path);
@@ -160,6 +160,25 @@ void	display(t_dir *dir)
 	while (i < j)
 		ft_putendl(dir->display[i++]);
 }
+
+/*
+** Color for -l option
+*/
+
+void	l_color(t_dir *dir, int i)
+{
+	int ok;
+
+	dir->file_path = get_file_path(dir->path, dir->names[i]);
+	ok = check_path(dir->file_path);
+	if (ok == 1)
+		ft_putendl(name(dir, i));
+	else if (ok == 2)
+		ft_putendlcolor(name(dir, i), CYAN);
+	else if (ok == 3)
+		ft_putendlcolor(name(dir, i), MAGENTA);
+}
+
 
 /*
 ** Display but with incredibly beautiful colors

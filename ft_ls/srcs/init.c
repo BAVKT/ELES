@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:43:29 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 17:04:04 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:35:28 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	init_base(char **av)
 	i = 0;
 	while (i < tab_len(av))
 		g_b.paths[i++] = NULL;
-	i = 1;
+	i = 0;
 	ok = 0;
-	while (av[i])
+	while (av[++i])
 	{
-		if (!check_path(av[i++]))
+		if (!check_path(av[i]) && av[i][0] != '-')
 		{
 			ok = 1;
 			g_b.paths[0] = NULL;
@@ -95,7 +95,7 @@ void	get_dir_tab(t_dir *dir)
 			if (ft_strchr(g_b.options, 'a') && !check_point(dir->dirent->d_name))
 				dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);
 			else if (dir->dirent->d_name[0] != '.')
-				dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);				
+				dir->dir_tab[i++] = ft_strdup(dir->dirent->d_name);
 		}
 	}
 	closedir(dir->rep);
@@ -103,7 +103,7 @@ void	get_dir_tab(t_dir *dir)
 }
 
 /*
-** Fill the names tab without the -a option 
+** Fill the names tab without the -a option
 */
 
 void	get_names(t_dir *dir)
@@ -146,8 +146,6 @@ void	set_paths(char **av)
 			i++;
 		else
 		{
-			// if (av[i] && av[i][0] == '-' && g_b.ac > 2)
-			// 	g_b.paths[0] = NULL;
 			if (!check_path(av[i]))
 			{
 				error_path(av[i]);

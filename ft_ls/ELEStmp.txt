@@ -16,13 +16,10 @@ LS note maison
 
 RESTE A FAIRE :
 
-- Couille si on met l'argument avant les options
-	./ft_ls testdir -Rla
-- Le -R marche pas sur le /dev 
+- Le -R marche pas sur le /dev
 	+ l'affichage qui marche avec -l mais pas en normal
 		- Manque l'instantiation de nb dans get_spaces() ?
 - Probleme affichage liens symboliques
-- Il y a pas de couleur sur le -l
 - Mauvais espacement avant la size avec -l
 
 
@@ -56,7 +53,7 @@ Base :
 		- En plus, pour chaque dossier dont le contenu est affiché, on doit afficher le nombre total de blocks 512-bytes
 			sur une ligne seule, juste avant les autres informations.
 		- Si le fichier a des extended attributes, on affiche un '@' apres les permissions.
-			"Extended attributes are name:value pairs associated permanently with files and directories". 
+			"Extended attributes are name:value pairs associated permanently with files and directories".
 			There are four extended attribute classes: security, system, trusted and user.
 			Sinon si il a des extended security permissions, on met un '+' apres les permissions.
 		- Si le fichier a plus de 6 mois, on affiche son annee au lieu de l'heure/min.
@@ -83,10 +80,10 @@ Fonctions autorisées :
 ◦ readdir		//Lire un dossier		dirent = readdir(rep);
 ◦ closedir		//Fermer le dossier		closedir(rep);
 
-◦ stat			//Récupère l'état du fichier et remplit buf. 
-					int stat(const char *path, struct stat *buf); 
+◦ stat			//Récupère l'état du fichier et remplit buf.
+					int stat(const char *path, struct stat *buf);
 
-◦ lstat			//identique a stat sauf pour les ln ou il point sur lui meme. 
+◦ lstat			//identique a stat sauf pour les ln ou il point sur lui meme.
 					int fstat(int fd, struct stat *buf);
 ◦ getpwuid
 	   struct passwd *getpwuid (uid_t uid);

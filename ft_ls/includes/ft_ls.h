@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:11:18 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:42:44 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_dir
 	char 			*path;		//Le path actuel
 	char			*file_path;	//Le path du file
 	char			**names;	//Tab contenant les noms des fichiers dans l'ordre a afficher
-	char			**display;	//Contient la ligne finale a afficher 
+	char			**display;	//Contient la ligne finale a afficher
 	char			**dir_tab;	//Tab contenant tous les dirs du repertoire courant
 }					t_dir;
 
@@ -107,5 +107,7 @@ void				print_l(t_dir *dir);
 void				presort_time(t_dir *dir, int time);
 int					get_stat(t_dir *dir, char *name, int i);
 void				store_stat(t_dir *dir, t_s *tmp, char *name);
+void				l_color(t_dir *dir, int i);
+char				*name(t_dir *dir, int i);
 
 #endif

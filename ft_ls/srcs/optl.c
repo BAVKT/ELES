@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 17:06:01 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:42:15 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ char	*mtime(t_dir *dir)
 	if (ti > 15778800 || ti < 0)
 	{
 		str = ft_strncpy(str, &(tmp[4]), 6);
-		str = ft_strjoin(str, " ");
+		str = ft_strjoin_free(str, " ");
 		tmp3 = ft_strncpy(tmp3, &(tmp[20]), 4);
 		tmp2 = ft_strjoin(str, tmp3);
-		tmp2 = ft_strjoin(tmp2, " ");
+		tmp2 = ft_strjoin_free(tmp2, " ");
 		ft_strdel(&tmp3);
 		ft_strdel(&str);
 	}
@@ -201,9 +201,9 @@ void	print_l(t_dir *dir)
 	int	i;
 	int	*tab;
 
-	i = 0;
+	i = -1;
 	tab = get_spaces(dir);
-	while (dir->names[i])
+	while (dir->names[++i])
 	{
 		if (get_stat(dir, dir->names[i], 0))
 		{
@@ -218,9 +218,9 @@ void	print_l(t_dir *dir)
 			ft_putstr(size(dir, i, tab));
 			ft_putstr(mtime(dir));
 			ft_putstr(" ");
-			ft_putendl(name(dir, i));
+			l_color(dir, i);
+			// ft_putendl(name(dir, i));
 		}
-		i++;
 	}
 }
 
