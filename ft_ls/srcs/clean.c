@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 17:55:07 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:24:20 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/23 22:18:40 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 
 /*
-** Free all the elements from t_base 
+** Free all the elements from t_base
 */
 
 void	clean_base()

@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 18:55:34 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:11:19 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/24 16:02:10 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	store_stat(t_dir *dir, t_s *tmp, char *name)
 // {
 //             ft_putendlcolor("opt_t();", MAGENTA);
 // 	int		i;
-// 	time_t	time;	
+// 	time_t	time;
 // 	t_s		*tmp;
 
 // 	i = 0;

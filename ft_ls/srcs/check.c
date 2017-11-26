@@ -6,20 +6,20 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 03:27:40 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:24:22 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/23 22:18:41 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Check the path, return 2 if path is dir 1, 
-** if path is file, 3 if symbolic link 0 else 
+** Check the path, return 2 if path is dir 1,
+** if path is file, 3 if symbolic link 0 else
 */
 
 int     check_path(char *path)
 {
-               //ft_putendlcolor("check_path();", MAGENTA);
+               // ft_putendlcolor("check_path();", MAGENTA);
     struct stat st;
     int     r;
 
@@ -47,6 +47,7 @@ int     check_path(char *path)
 
 int     check_point(char *path)
 {
+            // ft_putendlcolor("check_point();", MAGENTA);
     if (ft_strcmp(path, ".") != 0 && ft_strcmp(path, "..") != 0)
         return (0);
     return (1);

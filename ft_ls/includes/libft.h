@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 13:46:11 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/08/13 16:14:24 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/05 21:03:20 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define WHITE_BK_RED_FG    "\x1b[47;31m"
 # define BLUE_BK_WHITE_FG   "\x1b[44;37m"
 # define GREEN_BK_YELLOW_FG "\x1b[42;33m"
+# define WHITE_BK_YELLOW_FG "\x1b[43;31m"
 # include <string.h>
 # include <string.h>
 # include <unistd.h>

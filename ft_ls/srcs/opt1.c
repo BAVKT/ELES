@@ -6,14 +6,14 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 17:27:00 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 16:42:36 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Basic sort is lexicographical and not sensitive to case
+** Basic sort is lexicographical and not case sensitive
 */
 
 void	basic_sort(t_dir *dir)
@@ -50,7 +50,7 @@ char	*opt_tab(char **av)
 	i = 0;
 	k = 0;
 	g_b.options = ft_strnew(7);
-	while (av[++i])
+	while (av[++i] && av[1][0] == '-')
 	{
 		if (av[i][0] == '-')
 		{
@@ -108,7 +108,7 @@ void	opt_r(t_dir *dir)
 	i = 0;
 	x = tab_len(dir->names);
 	rev = (char **)malloc(sizeof(char *) * (x + 1));
-	x -= 1 ;
+	x -= 1;
 	while (dir->names[i])
 	{
 		rev[i] = ft_strdup(dir->names[x - i]);
@@ -140,5 +140,10 @@ void	opt_R(t_dir *dir)
 	!ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(dir);
 	dir->dir_tab = ft_cp_tab(dir->dir_tab, dir->names);
 	while (dir->dir_tab && dir->dir_tab[i])
+	{
+		ft_putchar('\n');
+		ft_putstr(get_file_path(dir->path, dir->dir_tab[i]));
+		ft_putcharendl(':');
 		ls(get_file_path(dir->path, dir->dir_tab[i++]));
+	}
 }

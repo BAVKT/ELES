@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 17:42:16 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/24 16:02:40 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		len_dirent(t_dir *dir)
 
 int		int_space(int nb)
 {
+            // ft_putendlcolor("int_space();", MAGENTA);
 	return (ft_strlen(ft_itoa(nb)));
 }
 
@@ -95,7 +96,7 @@ int		*get_spaces(t_dir *dir)
 
 char	*get_file_path(char *path, char *name)
 {
-            //ft_putendlcolor("get_file_path();", MAGENTA);
+            // ft_putendlcolor("get_file_path();", MAGENTA);
 	char	*tmp;
 
 	if (!ft_strcmp(path, "."))
@@ -117,17 +118,24 @@ int		display_file(t_dir *dir)
 	int		ok;
 	char	*c;
 
-	dir->names = (char **)malloc(sizeof(char *) * 2);
+	if (!(dir->names = (char **)malloc(sizeof(char *) * 2)))
+		perror("MALLOC FAILED");
 	ok = check_path(dir->path);
 	if (ok > 0 && ok != 2)
 	{
-		c = ft_strrchr(dir->path, '/');
-		if (c + 1 == '\0')
-			*c = '\0';
-		c = ft_strrchr(dir->path, '/');
-		dir->names[0] = ft_strdup(c + 1);
-		dir->names[1] = NULL;
-		//*c = '\0';
+		if (!(c = ft_strrchr(dir->path, '/')))
+			dir->names[0] = dir->path;
+		else
+		{
+			if (c + 1 == '\0')
+				*c = '\0';
+			c = ft_strrchr(dir->path, '/');
+				// ft_putendl("yooo");
+				// ft_putendl(dir->path);
+			dir->names[0] = ft_strdup(c + 1);
+			dir->names[1] = NULL;
+		}
+		// *c = '\0';
 		if (ft_strchr(g_b.options, 'l'))
 			opt_l(dir);
 		else
@@ -156,7 +164,6 @@ void	display(t_dir *dir)
 		tmp[ft_strlen(dir->path) - 1] = ':';
 		ft_putendl(tmp);
 	}
-
 	while (i < j)
 		ft_putendl(dir->display[i++]);
 }
@@ -177,6 +184,8 @@ void	l_color(t_dir *dir, int i)
 		ft_putendlcolor(name(dir, i), CYAN);
 	else if (ok == 3)
 		ft_putendlcolor(name(dir, i), MAGENTA);
+	else
+		ft_putendlcolor(name(dir, i), YELLOW);
 }
 
 
@@ -210,6 +219,8 @@ void	display_color(t_dir *dir)
 			ft_putendlcolor(dir->names[i], CYAN);
 		else if (ok == 3)
 			ft_putendlcolor(dir->file_path, MAGENTA);
+		else
+			ft_putendlcolor(dir->names[i], YELLOW);
 		i++;
 	}
 }

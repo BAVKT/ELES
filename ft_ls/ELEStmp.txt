@@ -12,10 +12,17 @@ LS note maison
 ##############
 -g3 -fsanitize=address pour debug
 
-
+./ft_ls Makefile f auteur includes ELEStmp.txt -a
+./ft_ls -- -a
+./ft_ls -tl
+basic sort
 
 RESTE A FAIRE :
 
+-Changement des valeurs dans merge_tab ???
+- Regler le cas de quand in passe l'option apres les fichiers
+	+ Mauvais ordre si on met un dossier entre des fichiers il affiche
+	le dossier au milieu des ficheirs au lieu de le mettre a la fin
 - Le -R marche pas sur le /dev
 	+ l'affichage qui marche avec -l mais pas en normal
 		- Manque l'instantiation de nb dans get_spaces() ?

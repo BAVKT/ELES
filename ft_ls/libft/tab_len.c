@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 15:22:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/09/15 14:46:06 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:15:48 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		tab_len(char **tab)
 	int		i;
 
 	i = 0;
-	while (tab[i] != NULL)
+	while (tab[i])
 		i++;
 	return (i);
 }

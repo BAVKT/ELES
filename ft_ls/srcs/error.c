@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 05:31:42 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:24:19 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/23 22:18:40 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int		error(char *name, int e)
 {
+			ft_putendlcolor("error();", MAGENTA);
 	ft_putstr("./ft_ls: ");
 	ft_putstr(name);
 	ft_putstr(": ");
@@ -36,6 +37,7 @@ int		error(char *name, int e)
 
 void	error_path(char *arg)
 {
+			ft_putendlcolor("error_path();", MAGENTA);
 	ft_putstr("./ft_ls: ");
 	ft_putstr(arg);
 	ft_putendl(": No such file or directory");

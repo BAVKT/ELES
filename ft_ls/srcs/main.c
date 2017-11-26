@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/04 22:24:18 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:12:11 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,14 @@ int		main(int ac, char **av)
     g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av));
     init_base(av);
     j = tab_len(g_b.paths);
+            ft_putstr("j = ");
+            ft_putnbrendl(j);
+            ft_putendl(g_b.paths[0]);
+            ft_putendl("TAB = ");
+            ft_print_tab(g_b.paths);
+            ft_putendl("ENDTAB = ");
 	while (i < j && g_b.paths[i])
 		ls(g_b.paths[i++]);
- //   clean_base();
+    // clean_base();
 	return (0);
 }

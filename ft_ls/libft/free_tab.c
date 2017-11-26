@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 15:30:43 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/09/14 20:52:14 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/23 22:18:48 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	free_tab(void **tab)
 		tmp++;
 	}
 	free(tab);
+	tab = NULL;
 }
