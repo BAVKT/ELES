@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 18:55:34 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 19:23:00 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 19:29:39 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	opt_t(t_dir *dir)
 {
-            ft_putendlcolor("opt_t();", MAGENTA);
+			ft_putendlcolor("opt_t();", MAGENTA);
 	int		i;
 	time_t	time;
 	t_s		*tmp;

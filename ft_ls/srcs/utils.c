@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 19:23:04 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 20:20:08 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,12 @@ void	display(t_dir *dir)
 
 char	*get_color(char *path)
 {
+            // ft_putendlcolor("get_color();", MAGENTA);
 	int		ok;
 	char	*color;
 
 	ok = check_path(path);
-	if (ok == 1 || ok == 0)
+	if (ok == 1)
 		color = ft_strdup("\x1b[37m");
 	else if (ok == 2)
 		color = ft_strdup("\x1b[36m");
@@ -221,14 +222,17 @@ void	display_color(t_dir *dir)
 		tmp[ft_strlen(dir->path)] = ':';
 		dir->path[ft_strlen(dir->path)] = '\0';
 	}
-	ft_putchar('\n');
-	ft_putstr(dir->path);
-	ft_putcharendl(':');
+	if (ft_strcmp(dir->path, "."))
+	{
+		ft_putchar('\n');
+		ft_putstr(dir->path);
+		ft_putcharendl(':');
+	}
 	i = -1;
 	while (++i < j)
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		tmp = get_color(dir->names[i]);
+		tmp = get_color(dir->file_path);
 		(check_path(dir->file_path) == 3) ? ft_putendlcolor(dir->file_path, MAGENTA) : ft_putendlcolor(dir->names[i], tmp);
 		ft_strdel(&tmp);
 	}
