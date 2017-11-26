@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/24 16:02:40 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 19:23:04 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,25 +169,39 @@ void	display(t_dir *dir)
 }
 
 /*
+** return the color for display
+*/
+
+char	*get_color(char *path)
+{
+	int		ok;
+	char	*color;
+
+	ok = check_path(path);
+	if (ok == 1 || ok == 0)
+		color = ft_strdup("\x1b[37m");
+	else if (ok == 2)
+		color = ft_strdup("\x1b[36m");
+	else if (ok == 3)
+		color = ft_strdup("\x1b[35m");
+	else
+		color = ft_strdup("\x1b[33m");
+	return (color);
+}
+
+/*
 ** Color for -l option
 */
 
 void	l_color(t_dir *dir, int i)
 {
-	int ok;
+	char *color;
 
 	dir->file_path = get_file_path(dir->path, dir->names[i]);
-	ok = check_path(dir->file_path);
-	if (ok == 1)
-		ft_putendl(name(dir, i));
-	else if (ok == 2)
-		ft_putendlcolor(name(dir, i), CYAN);
-	else if (ok == 3)
-		ft_putendlcolor(name(dir, i), MAGENTA);
-	else
-		ft_putendlcolor(name(dir, i), YELLOW);
+	color = get_color(dir->file_path);
+	ft_putendlcolor(name(dir, i), color);
+	ft_strdel(&color);
 }
-
 
 /*
 ** Display but with incredibly beautiful colors
@@ -198,10 +212,8 @@ void	display_color(t_dir *dir)
             ft_putendlcolor("display_color();", MAGENTA);
 	int		i;
 	int		j;
-	int		ok;
 	char	*tmp;
 
-	i = 0;
 	j = tab_len(dir->display);
 	if (!check_point(dir->path))
 	{
@@ -209,18 +221,15 @@ void	display_color(t_dir *dir)
 		tmp[ft_strlen(dir->path)] = ':';
 		dir->path[ft_strlen(dir->path)] = '\0';
 	}
-	while (i < j)
+	ft_putchar('\n');
+	ft_putstr(dir->path);
+	ft_putcharendl(':');
+	i = -1;
+	while (++i < j)
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
-		ok = check_path(dir->file_path);
-		if (ok == 1)
-			ft_putendl(dir->names[i]);
-		else if (ok == 2)
-			ft_putendlcolor(dir->names[i], CYAN);
-		else if (ok == 3)
-			ft_putendlcolor(dir->file_path, MAGENTA);
-		else
-			ft_putendlcolor(dir->names[i], YELLOW);
-		i++;
+		tmp = get_color(dir->names[i]);
+		(check_path(dir->file_path) == 3) ? ft_putendlcolor(dir->file_path, MAGENTA) : ft_putendlcolor(dir->names[i], tmp);
+		ft_strdel(&tmp);
 	}
 }

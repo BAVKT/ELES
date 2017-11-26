@@ -6,11 +6,24 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 16:43:03 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 16:43:55 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:32:21 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** Normal swap but working one
+*/
+
+void	swaaap(char **a, char **b)
+{
+	char	*c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
 
 /*
 ** Sort a tab by ASCII
@@ -18,7 +31,6 @@
 
 char	**sort_ascii(char **tab)
 {
-            ft_putendlcolor("sort_ascii();", MAGENTA);
 	int	k;
 	int	ok;
 

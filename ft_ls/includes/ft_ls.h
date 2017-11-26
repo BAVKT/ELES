@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/24 16:27:57 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 19:22:58 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int					get_stat(t_dir *dir, char *name, int i);
 void				store_stat(t_dir *dir, t_s *tmp, char *name);
 void				l_color(t_dir *dir, int i);
 char				*name(t_dir *dir, int i);
-int					get_nb();
-void				tri_path();
+void				swaaap(char **a, char **b);
+void				tri_paths();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 16:36:51 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 16:40:22 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:30:45 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 char	**tab_new(int size)
 {
-            ft_putendlcolor("tabnew();", MAGENTA);
 	char	**tab;
 	int		i;
 
@@ -26,7 +25,7 @@ char	**tab_new(int size)
 	if (size <= 0)
 		return (NULL);
 	if (!(tab = (char **)malloc(sizeof(char *) * size + 1)))
-		perror("MALLOC FAILED");
+		return (NULL);
 	while (i < size)
 		tab[i++] = ft_strnew(0);
 	tab[i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 16:42:36 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/26 19:22:59 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ char	*opt_tab(char **av)
 			j = 1;
 			while (av[i][j])
 			{
-				if (av[i][j] != 'a' && av[i][j] != 'l' && av[i][j] != 'R' &&
-					av[i][j] != 'r' && av[i][j] != 't' && av[i][j] != '1' &&
-					av[i][j] != 'u')
+				if (av[i][1] == '-')
+					return (g_b.options);
+				else if (!ft_strchr("alRrtu1", av[i][j]))
 					usage();
 				else if (av[i][j])
 					g_b.options[k++] = av[i][j++];
