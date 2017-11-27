@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:56:37 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 19:22:58 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/27 19:33:08 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct		s_s
  	time_t    		atime;
  	time_t    		mtime;
  	time_t    		ctime;
- 	struct s_s		*next;
 }					t_s;
 
 int					main();
@@ -106,7 +105,7 @@ int					display_file(t_dir *dir);
 void				print_l(t_dir *dir);
 void				presort_time(t_dir *dir, int time);
 int					get_stat(t_dir *dir, char *name, int i);
-void				store_stat(t_dir *dir, t_s *tmp, char *name);
+t_s					*store_stat(t_dir *dir, int size);
 void				l_color(t_dir *dir, int i);
 char				*name(t_dir *dir, int i);
 void				swaaap(char **a, char **b);

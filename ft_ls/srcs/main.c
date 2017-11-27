@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 19:23:01 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/27 18:22:49 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		main(int ac, char **av)
 
 	i = 0;
 	g_b.ac = ac;
-	g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av));
+	if (!(g_b.paths = (char **)malloc(sizeof(char *) * tab_len(av))))
+		perror("MALLOC FAILED");
 	init_base(av);
 	j = tab_len(g_b.paths);
 	while (i < j && g_b.paths[i])
