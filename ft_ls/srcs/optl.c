@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 20:22:39 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/30 21:27:53 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ char	*size(t_dir *dir, int i, int *tab)
 
 void	print_l(t_dir *dir)
 {
-            ft_putendlcolor("print_l();", MAGENTA);
+            ft_putendlcolor("print_l();", BLUE);
 	int	i;
 	int	*tab;
 
@@ -219,7 +219,6 @@ void	print_l(t_dir *dir)
 			ft_putstr(mtime(dir));
 			ft_putstr(" ");
 			l_color(dir, i);
-			// ft_putendl(name(dir, i));
 		}
 	}
 }
@@ -235,16 +234,18 @@ void	opt_l(t_dir *dir)
 	char	*c;
 
 	i = 0;
-//	dir->file_path = get_file_path(dir->path, dir->names[i]);
-	i = check_path(dir->path);
+	if (!ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
+		dir->file_path = ft_strjoin("./", dir->names[i]);
+	else
+		dir->file_path = get_file_path(dir->path, dir->names[i]);
+	i = check_path(dir->file_path);
+			ft_putnbrendl(i);
+			ft_putendl(dir->file_path);
 	if (i == 2 || i == 4)
 		print_blocks(dir);
 	else if (i == 0)
 		return ;
-	else
-	{
-		c = ft_strrchr(dir->path, '/');
+	else if ((c = ft_strrchr(dir->path, '/')))
 		*c = '\0';
-	}
 	print_l(dir);
 }

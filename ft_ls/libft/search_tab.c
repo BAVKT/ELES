@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   search_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 20:10:59 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/28 18:27:24 by vmercadi         ###   ########.fr       */
+/*   Created: 2017/11/29 17:22:45 by vmercadi          #+#    #+#             */
+/*   Updated: 2017/11/29 17:28:06 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
-{
-	char	*s2;
-	int		i;
-	int		n;
+/*
+** Search the STR in the tab. return the pointer or NULL
+*/
 
-	n = ft_strlen(s1);
-	i = 0;
-	if (n + 1 <= 0 || !(s2 = (char *)malloc(sizeof(char) * (n + 1))))
+char	*search_tab(char **tab, char *str)
+{
+	int i;
+
+	if (!tab || !str)
 		return (NULL);
-	while (i < n)
+	i = -1;
+	while (tab[++i])
 	{
-		s2[i] = s1[i];
-		i++;
+		if (!ft_strcmp(tab[i], str))
+			return (tab[i]);
 	}
-	s2[i] = '\0';
-	return (s2);
+	return (NULL);
 }

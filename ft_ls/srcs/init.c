@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:43:29 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/27 19:52:39 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/30 21:02:08 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	get_names(t_dir *dir)
 	int	i;
 
 	i = 0;
-	dir->names = (char **)malloc(sizeof(char *) * (dir->len + 1));
+    dir->names = (char **)malloc(sizeof(char *) * (dir->len + 1));
 	dir->rep = opendir(dir->path);
 	while ((dir->dirent = readdir(dir->rep)))
 	{
@@ -131,7 +131,7 @@ void	get_names(t_dir *dir)
 
 void	swaaap(char **a, char **b)
 {
-			// ft_putendlcolor("swaaaap();", MAGENTA);
+			ft_putendlcolor("swaaaap();", MAGENTA);
 	char	*c;
 
 	c = *a;
@@ -145,6 +145,7 @@ void	swaaap(char **a, char **b)
 
 void	tri_paths()
 {
+            ft_putendlcolor("tri_paths();", MAGENTA);
 	int	i;
 	int k;
 

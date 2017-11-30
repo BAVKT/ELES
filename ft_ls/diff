@@ -1,0 +1,169 @@
+Only in ../../BIS/ft_ls/srcs: bonus.o
+diff -r srcs/check.c ../../BIS/ft_ls/srcs/check.c
+9c9
+< /*   Updated: 2017/11/28 18:27:26 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/26 20:22:34 by vmercadi         ###   ########.fr       */
+Only in ../../BIS/ft_ls/srcs: check.o
+diff -r srcs/clean.c ../../BIS/ft_ls/srcs/clean.c
+9c9
+< /*   Updated: 2017/11/30 14:14:24 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/26 20:22:36 by vmercadi         ###   ########.fr       */
+Only in ../../BIS/ft_ls/srcs: clean.o
+diff -r srcs/error.c ../../BIS/ft_ls/srcs/error.c
+9c9
+< /*   Updated: 2017/11/30 14:14:22 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/26 20:22:36 by vmercadi         ###   ########.fr       */
+Only in ../../BIS/ft_ls/srcs: error.o
+diff -r srcs/init.c ../../BIS/ft_ls/srcs/init.c
+9c9
+< /*   Updated: 2017/11/30 14:01:09 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/27 19:52:39 by vmercadi         ###   ########.fr       */
+114c114
+<     dir->names = (char **)malloc(sizeof(char *) * (dir->len + 1));
+---
+> 	dir->names = (char **)malloc(sizeof(char *) * (dir->len + 1));
+134c134
+< 			ft_putendlcolor("swaaaap();", MAGENTA);
+---
+> 			// ft_putendlcolor("swaaaap();", MAGENTA);
+148d147
+<             ft_putendlcolor("tri_paths();", MAGENTA);
+Only in ../../BIS/ft_ls/srcs: init.o
+diff -r srcs/main.c ../../BIS/ft_ls/srcs/main.c
+9c9
+< /*   Updated: 2017/11/29 20:58:18 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/27 18:22:49 by vmercadi         ###   ########.fr       */
+32d31
+< 					ft_putendl("allo");
+Only in ../../BIS/ft_ls/srcs: main.o
+diff -r srcs/opt1.c ../../BIS/ft_ls/srcs/opt1.c
+9c9
+< /*   Updated: 2017/11/29 19:55:20 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/26 20:22:40 by vmercadi         ###   ########.fr       */
+111,112c111,116
+< 	while (dir->names[x])
+< 		rev[i++] = ft_strdup(dir->names[x--]);
+---
+> 	x -= 1;
+> 	while (dir->names[i])
+> 	{
+> 		rev[i] = ft_strdup(dir->names[x - i]);
+> 		i++;
+> 	}
+Only in ../../BIS/ft_ls/srcs: opt1.o
+diff -r srcs/opt_t.c ../../BIS/ft_ls/srcs/opt_t.c
+9c9
+< /*   Updated: 2017/11/30 15:39:25 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/27 19:54:33 by vmercadi         ###   ########.fr       */
+27d26
+< 		ft_putendlcolor("remp_tab();", MAGENTA);
+38,39d36
+< 	dir->names[i] = NULL;
+< 	ft_putnbrendl(len);
+41,74c38
+<  }
+< 
+< /*
+< ** -t Option	Sort by time
+< */
+< 
+< // void	opt_t(t_dir *dir)
+< // {
+< //             ft_putendlcolor("opt_t();", MAGENTA);
+< // 	int	i;
+< // 	int	time;
+< 
+< // 	i = 0;
+< // 	while (dir->names[i + 1])
+< // 	{
+< // 		dir->file_path = get_file_path(dir->path, dir->names[i]);
+< // 		stat(dir->file_path, &dir->stat);
+< // 		time = dir->stat.st_mtime;
+< // 		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
+< // 		stat(dir->file_path, &dir->stat);
+< // 				ft_putstr("time = ");
+< // 				ft_putnbrendl(time);
+< // 				ft_putstr("time2 = ");
+< // 				ft_putnbrendl(dir->stat.st_mtime);
+< // 		if (dir->stat.st_mtime > time)
+< // 		{
+< // 			swaaap(&dir->names[i], &dir->names[i + 1]);
+< // 			i = 0;
+< // 		}
+< // 		else
+< // 			i++;
+< // 	}
+< // }
+< 
+---
+> }
+Only in ../../BIS/ft_ls/srcs: opt_t.o
+diff -r srcs/optl.c ../../BIS/ft_ls/srcs/optl.c
+9c9
+< /*   Updated: 2017/11/30 16:34:46 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/30 16:39:19 by vmercadi         ###   ########.fr       */
+221a222
+> 			// ft_putendl(name(dir, i));
+236,241c237,239
+< 	// i = 0;
+< 	// if (!ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
+< 	// 	dir->file_path = ft_strjoin("./", dir->names[i]);
+< 	// else
+< 	// 	dir->file_path = get_file_path(dir->path, dir->names[i]);
+< 	i = check_path(dir->file_path);
+---
+> 	i = 0;
+> //	dir->file_path = get_file_path(dir->path, dir->names[i]);
+> 	i = check_path(dir->path);
+246c244,246
+< 	else if ((c = ft_strrchr(dir->path, '/')))
+---
+> 	else
+> 	{
+> 		c = ft_strrchr(dir->path, '/');
+247a248
+> 	}
+Only in ../../BIS/ft_ls/srcs: optl.o
+Only in ../../BIS/ft_ls/srcs: sort.o
+Only in ../../BIS/ft_ls/srcs: test.o
+diff -r srcs/utils.c ../../BIS/ft_ls/srcs/utils.c
+9c9
+< /*   Updated: 2017/11/30 16:29:32 by vmercadi         ###   ########.fr       */
+---
+> /*   Updated: 2017/11/27 16:06:18 by vmercadi         ###   ########.fr       */
+47,51c47
+< 		// ft_putendlcolor("get_stat();", MAGENTA);
+< 	if (check_path(name) == 2)
+< 		dir->file_path = get_file_path(dir->path, name);
+< 	if (!ft_strchr(name, '/') && search_tab(g_b.paths, name))
+< 		dir->file_path = ft_strjoin("./", name);
+---
+> 	dir->file_path = get_file_path(dir->path, name);
+60a57
+> 
+130d126
+< 		{
+132,133d127
+< 			dir->names[1] = NULL;
+< 		}
+138a133,134
+> 				// ft_putendl("yooo");
+> 				// ft_putendl(dir->path);
+203d198
+<             // ft_putendlcolor("l_color();", MAGENTA);
+206,209c201
+< 	if (!ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
+< 		dir->file_path = ft_strjoin("./", dir->names[i]);
+< 	else
+< 		dir->file_path = get_file_path(dir->path, dir->names[i]);
+---
+> 	dir->file_path = get_file_path(dir->path, dir->names[i]);
+Only in ../../BIS/ft_ls/srcs: utils.o

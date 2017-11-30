@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/26 20:22:40 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/29 19:55:20 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,8 @@ void	opt_r(t_dir *dir)
 	i = 0;
 	x = tab_len(dir->names);
 	rev = (char **)malloc(sizeof(char *) * (x + 1));
-	x -= 1;
-	while (dir->names[i])
-	{
-		rev[i] = ft_strdup(dir->names[x - i]);
-		i++;
-	}
+	while (dir->names[x])
+		rev[i++] = ft_strdup(dir->names[x--]);
 	rev[i] = NULL;
 	i = 0;
 	while (rev[i])

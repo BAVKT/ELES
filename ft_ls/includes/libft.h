@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 13:46:11 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/05 21:03:20 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:26:30 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@
 # define WHITE_BK_RED_FG    "\x1b[47;31m"
 # define BLUE_BK_WHITE_FG   "\x1b[44;37m"
 # define GREEN_BK_YELLOW_FG "\x1b[42;33m"
-# define WHITE_BK_YELLOW_FG "\x1b[43;31m"
 # include <string.h>
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# define BUFF_SIZE 66
+# define BUFF_SIZE 666
 
 typedef struct		s_lst
 {
@@ -154,6 +153,9 @@ char				**ft_cp_tab(char **tab, char **dst);
 int					tab_len(char **tab);
 void				free_tab(void **tab);
 void				ft_print_tab(char **str);
+char				**tab_new(int size);
+char				**sort_ascii(char **tab);
+char				*search_tab(char **tab, char *str);
 
 /*
 ** Other
@@ -169,5 +171,6 @@ char				*no_case(char *str);
 ** Int
 */
 char				*ft_itoa(int n);
+int					ft_sqrt(int nb);
 
 #endif

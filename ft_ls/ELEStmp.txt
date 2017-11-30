@@ -15,9 +15,12 @@ LS note maison
 ./ft_ls -tl
 basic sort
 
+
+
+
 RESTE A FAIRE :
 
--t qui trie pas
+-t qui trie pas (et encore moins si y a pas de dossier)
 - Le -R marche pas sur le /dev
 	+ l'affichage qui marche avec -l mais pas en normal
 		- Manque l'instantiation de nb dans get_spaces() ?

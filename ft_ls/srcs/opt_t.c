@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 18:55:34 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/27 19:54:33 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:39:25 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	swap_t(t_s *a, t_s *b)
 
 void	remptab(t_dir *dir, t_s *s)
 {
+		ft_putendlcolor("remp_tab();", MAGENTA);
 	int		i;
 	int		len;
 
@@ -34,8 +35,43 @@ void	remptab(t_dir *dir, t_s *s)
 	i = -1;
 	while (++i < len)
 		dir->names[i] = ft_strdup(s[i].name);
+	dir->names[i] = NULL;
+	ft_putnbrendl(len);
 	opt_r(dir);
-}
+ }
+
+/*
+** -t Option	Sort by time
+*/
+
+// void	opt_t(t_dir *dir)
+// {
+//             ft_putendlcolor("opt_t();", MAGENTA);
+// 	int	i;
+// 	int	time;
+
+// 	i = 0;
+// 	while (dir->names[i + 1])
+// 	{
+// 		dir->file_path = get_file_path(dir->path, dir->names[i]);
+// 		stat(dir->file_path, &dir->stat);
+// 		time = dir->stat.st_mtime;
+// 		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
+// 		stat(dir->file_path, &dir->stat);
+// 				ft_putstr("time = ");
+// 				ft_putnbrendl(time);
+// 				ft_putstr("time2 = ");
+// 				ft_putnbrendl(dir->stat.st_mtime);
+// 		if (dir->stat.st_mtime > time)
+// 		{
+// 			swaaap(&dir->names[i], &dir->names[i + 1]);
+// 			i = 0;
+// 		}
+// 		else
+// 			i++;
+// 	}
+// }
+
 
 void	opt_t(t_dir *dir)
 {

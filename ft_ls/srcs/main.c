@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 00:55:02 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/27 18:22:49 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/29 20:58:18 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ls(char *path)
 	{
 		(ft_strchr(g_b.options, 'a')) ? opt_a(&dir) : get_names(&dir);
 		basic_sort(&dir);
+					ft_putendl("allo");
 		!ft_strchr(g_b.options, 't') ? i = 0 : opt_t(&dir);
 		!ft_strchr(g_b.options, 'u') ? i = 0 : opt_u(&dir);
 		!ft_strchr(g_b.options, 'r') ? i = 0 : opt_r(&dir);

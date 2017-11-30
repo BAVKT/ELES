@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/27 16:06:18 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/11/30 21:29:37 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ int		int_space(int nb)
 
 int		get_stat(t_dir *dir, char *name, int i)
 {
-	dir->file_path = get_file_path(dir->path, name);
+		ft_putendlcolor("get_stat();", MAGENTA);
+	// if (check_path(name) == 2)
+		dir->file_path = get_file_path(dir->path, name);
+	if (check_path(name) != 2 && search_tab(g_b.paths, name))
+		dir->file_path = ft_strjoin("./", name);
 	if (lstat(dir->file_path, &dir->stat) == -1)
 	{
 		if (i)
@@ -53,7 +57,6 @@ int		get_stat(t_dir *dir, char *name, int i)
 	}
 	return (1);
 }
-
 
 /*
 ** Return a tab with the good number of spaces for each
@@ -124,14 +127,15 @@ int		display_file(t_dir *dir)
 	if (ok > 0 && ok != 2)
 	{
 		if (!(c = ft_strrchr(dir->path, '/')))
+		{
 			dir->names[0] = dir->path;
+			dir->names[1] = NULL;
+		}
 		else
 		{
 			if (c + 1 == '\0')
 				*c = '\0';
 			c = ft_strrchr(dir->path, '/');
-				// ft_putendl("yooo");
-				// ft_putendl(dir->path);
 			dir->names[0] = ft_strdup(c + 1);
 			dir->names[1] = NULL;
 		}
@@ -196,9 +200,13 @@ char	*get_color(char *path)
 
 void	l_color(t_dir *dir, int i)
 {
+            // ft_putendlcolor("l_color();", MAGENTA);
 	char *color;
 
-	dir->file_path = get_file_path(dir->path, dir->names[i]);
+	if (!ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
+		dir->file_path = ft_strjoin("./", dir->names[i]);
+	else
+		dir->file_path = get_file_path(dir->path, dir->names[i]);
 	color = get_color(dir->file_path);
 	ft_putendlcolor(name(dir, i), color);
 	ft_strdel(&color);
