@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:43:29 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/30 21:02:08 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:28:23 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	get_names(t_dir *dir)
 
 void	swaaap(char **a, char **b)
 {
-			ft_putendlcolor("swaaaap();", MAGENTA);
+			// ft_putendlcolor("swaaaap();", MAGENTA);
 	char	*c;
 
 	c = *a;

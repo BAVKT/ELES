@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 16:23:00 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/30 21:27:53 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:28:29 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	print_blocks(t_dir *dir)
 }
 
 /*
-** Return the complete name to display (work for for symbolic link too)
+** Return the complete name to display (work for symbolic link too)
 */
 
 char	*name(t_dir *dir, int i)
@@ -197,7 +197,7 @@ char	*size(t_dir *dir, int i, int *tab)
 
 void	print_l(t_dir *dir)
 {
-            ft_putendlcolor("print_l();", BLUE);
+            ft_putendlcolor("print_l();", MAGENTA);
 	int	i;
 	int	*tab;
 
@@ -234,13 +234,11 @@ void	opt_l(t_dir *dir)
 	char	*c;
 
 	i = 0;
-	if (!ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
+	if (dir->names[i] && !ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
 		dir->file_path = ft_strjoin("./", dir->names[i]);
 	else
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 	i = check_path(dir->file_path);
-			ft_putnbrendl(i);
-			ft_putendl(dir->file_path);
 	if (i == 2 || i == 4)
 		print_blocks(dir);
 	else if (i == 0)

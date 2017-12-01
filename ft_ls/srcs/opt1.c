@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:32:27 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/29 19:55:20 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:20:41 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	basic_sort(t_dir *dir)
 {
-            ft_putendlcolor("basic_sort();", MAGENTA);
+            // ft_putendlcolor("basic_sort();", MAGENTA);
 	int	i;
 
 	i = 0;
@@ -98,6 +98,7 @@ void	opt_a(t_dir *dir)
 ** -r Option	Reverse the order
 */
 
+
 void	opt_r(t_dir *dir)
 {
             ft_putendlcolor("opt_r();", MAGENTA);
@@ -108,8 +109,12 @@ void	opt_r(t_dir *dir)
 	i = 0;
 	x = tab_len(dir->names);
 	rev = (char **)malloc(sizeof(char *) * (x + 1));
-	while (dir->names[x])
-		rev[i++] = ft_strdup(dir->names[x--]);
+	x -= 1;
+	while (dir->names[i])
+	{
+		rev[i] = ft_strdup(dir->names[x - i]);
+		i++;
+	}
 	rev[i] = NULL;
 	i = 0;
 	while (rev[i])

@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 02:24:09 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/30 21:29:37 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:20:46 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		int_space(int nb)
 
 int		get_stat(t_dir *dir, char *name, int i)
 {
-		ft_putendlcolor("get_stat();", MAGENTA);
+		// ft_putendlcolor("get_stat();", MAGENTA);
 	// if (check_path(name) == 2)
 		dir->file_path = get_file_path(dir->path, name);
 	if (check_path(name) != 2 && search_tab(g_b.paths, name))
@@ -79,9 +79,9 @@ int		*get_spaces(t_dir *dir)
 	{
 		if (get_stat(dir, dir->names[i], 0))
 		{
-			tab[0] = ((nb = ft_strlen(mode(dir))) > tab[0]) ? nb : tab[0];
+			tab[0] = ((nb = ft_strlen(mode(dir))) > tab[0]) ? nb + 1 : tab[0];
 			tab[1] = ((nb = int_space(dir->stat.st_nlink)) > tab[1]) ? nb : tab[1];
-			tab[2] = ((nb = ft_strlen(owner(dir))) > tab[2]) ? nb : tab[2];
+			tab[2] = ((nb = ft_strlen(owner(dir))) > tab[2]) ? nb + 1 : tab[2];
 			tab[3] = ((nb = ft_strlen(gid(dir))) > tab[3]) ? nb : tab[3];
 			tab[4] = ((nb = int_space(dir->stat.st_size)) > tab[4]) ? nb : tab[4];
 			tab[5] = ((nb = ft_strlen(mtime(dir))) > tab[5]) ? nb : tab[5];
@@ -201,7 +201,7 @@ char	*get_color(char *path)
 void	l_color(t_dir *dir, int i)
 {
             // ft_putendlcolor("l_color();", MAGENTA);
-	char *color;
+	char	*color;
 
 	if (!ft_strchr(dir->names[i], '/') && search_tab(g_b.paths, dir->names[i]))
 		dir->file_path = ft_strjoin("./", dir->names[i]);
@@ -241,7 +241,7 @@ void	display_color(t_dir *dir)
 	{
 		dir->file_path = get_file_path(dir->path, dir->names[i]);
 		tmp = get_color(dir->file_path);
-		(check_path(dir->file_path) == 3) ? ft_putendlcolor(dir->file_path, MAGENTA) : ft_putendlcolor(dir->names[i], tmp);
+		(check_path(dir->file_path) == 3) ? ft_putendlcolor(dir->names[i], MAGENTA) : ft_putendlcolor(dir->names[i], tmp);
 		ft_strdel(&tmp);
 	}
 }

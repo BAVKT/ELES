@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 18:55:34 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/30 15:39:25 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:49:07 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,57 +44,52 @@ void	remptab(t_dir *dir, t_s *s)
 ** -t Option	Sort by time
 */
 
-// void	opt_t(t_dir *dir)
-// {
-//             ft_putendlcolor("opt_t();", MAGENTA);
-// 	int	i;
-// 	int	time;
-
-// 	i = 0;
-// 	while (dir->names[i + 1])
-// 	{
-// 		dir->file_path = get_file_path(dir->path, dir->names[i]);
-// 		stat(dir->file_path, &dir->stat);
-// 		time = dir->stat.st_mtime;
-// 		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
-// 		stat(dir->file_path, &dir->stat);
-// 				ft_putstr("time = ");
-// 				ft_putnbrendl(time);
-// 				ft_putstr("time2 = ");
-// 				ft_putnbrendl(dir->stat.st_mtime);
-// 		if (dir->stat.st_mtime > time)
-// 		{
-// 			swaaap(&dir->names[i], &dir->names[i + 1]);
-// 			i = 0;
-// 		}
-// 		else
-// 			i++;
-// 	}
-// }
-
-
 void	opt_t(t_dir *dir)
 {
-		ft_putendlcolor("opt_t();", MAGENTA);
-	int		i;
-	int		size;
-	time_t	ti;
-	t_s		*s;
+            ft_putendlcolor("opt_t();", MAGENTA);
+	int	i;
+	int	time;
 
-	size = tab_len(dir->names);
-	s = store_stat(dir, size);
-	i = -1;
-	while (++i < size - 1)
+	i = 0;
+	while (dir->names[i] && dir->names[i + 1])
 	{
-		ti = s[i].mtime;
-		if (ti > s[i + 1].mtime)
+		dir->file_path = get_file_path(dir->path, dir->names[i]);
+		stat(dir->file_path, &dir->stat);
+		time = dir->stat.st_mtime;
+		dir->file_path = get_file_path(dir->path, dir->names[i + 1]);
+		stat(dir->file_path, &dir->stat);
+		if (dir->stat.st_mtime > time)
 		{
-			swap_t(&s[i], &s[i + 1]);
-			i = -1;
+			swaaap(&dir->names[i], &dir->names[i + 1]);
+			i = 0;
 		}
+		else
+			i++;
 	}
-	remptab(dir, s);
 }
+
+// void	opt_t(t_dir *dir)
+// {
+// 		ft_putendlcolor("opt_t();", MAGENTA);
+// 	int		i;
+// 	int		size;
+// 	time_t	ti;
+// 	t_s		*s;
+
+// 	size = tab_len(dir->names);
+// 	s = store_stat(dir, size);
+// 	i = -1;
+// 	while (++i < size - 1)
+// 	{
+// 		ti = s[i].mtime;
+// 		if (ti > s[i + 1].mtime)
+// 		{
+// 			swap_t(&s[i], &s[i + 1]);
+// 			i = -1;
+// 		}
+// 	}
+// 	remptab(dir, s);
+// }
 
 t_s		*store_stat(t_dir *dir, int size)
 {

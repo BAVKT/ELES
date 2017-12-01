@@ -6,7 +6,7 @@
 /*   By: vmercadi <vmercadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/13 17:55:07 by vmercadi          #+#    #+#             */
-/*   Updated: 2017/11/30 14:14:24 by vmercadi         ###   ########.fr       */
+/*   Updated: 2017/12/01 20:20:45 by vmercadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ void	clean_base()
 void	clean_sdir(t_dir *dir)
 {
             ft_putendlcolor("clean_sdir();", MAGENTA);
-    int i;
+	int i;
 
-    i = 0;
+	i = 0;
 	dir->path ? ft_strdel(&dir->path) : i++;
 	dir->file_path ? ft_strdel(&dir->file_path) : i++;
-    	ft_putendl("pouet");
 	free_tab((void **)dir->names);
 	free_tab((void **)dir->display);
 	free_tab((void **)dir->dir_tab);
