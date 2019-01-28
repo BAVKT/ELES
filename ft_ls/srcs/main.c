@@ -27,6 +27,7 @@ void	ls(char *path)
 		return ;
 	if (dir.len)
 	{
+		
 		(ft_strchr(g_b.options, 'a')) ? opt_a(&dir) : get_names(&dir);
 		basic_sort(&dir);
 		!ft_strchr(g_b.options, 't') ? i = 0 : opt_t(&dir);
